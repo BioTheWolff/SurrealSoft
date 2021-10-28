@@ -8,17 +8,43 @@ abstract class CRUDController
 {
 
     /**
+     * POST route
+     * Creates an object in the table
      *
      * @return null
      */
-    public abstract function create();
+    public static abstract function create();
 
-    public abstract function read();
+    /**
+     * GET route
+     * Displays a specific object from the table (identified by a unique/primary key)
+     *
+     * @return null
+     */
+    public static abstract function read();
 
-    public abstract function readAll();
+    /**
+     * GET route
+     * Displays all objects from the table
+     *
+     * @return null
+     */
+    public static abstract function readAll();
 
-    public abstract function update();
+    /**
+     * POST route
+     * Updates a given object identified by a key (unique/primary)
+     *
+     * @return null
+     */
+    public static abstract function update();
 
-    public abstract function delete();
+    /**
+     * POST route
+     * Deletes a specific object from the database
+     *
+     * @return null
+     */
+    public static abstract function delete();
 
 }
