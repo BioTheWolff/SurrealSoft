@@ -26,19 +26,36 @@ class Config
 
     private function __construct()
     {
-        $this->config = array_merge(Path::get(['config', 'config']), Path::get(['config', 'env']));
+        $this->config = array_merge(
+            require(Path::get(['config', 'config'])),
+            require(Path::get(['config', 'env']))
+        );
     }
 
     /**
      * Get a value from the config using its key
      *
      * @param string $key the key to get from the config
-     * @param string|null $default the default value if the key doesn't exist
+     * @param mixed|null $default the default value if the key doesn't exist
      * @return mixed|string|null the value, either the config or default value
      */
-    public function get(string $key, string $default = null)
+    public function get(string $key, $default = null)
     {
         return array_key_exists($key, $this->config) ? $this->config[$key] : $default;
+    }
+
+    /**
+     * Get values from the config using array items and returns an array of corresponding values
+     *
+     * @param array $keys the array of keys to get from the config
+     * @param mixed|null $default the default value for each key that doesn't exist in config
+     * @return array the array of values built from the requested keys
+     */
+    public function getm(array $keys, $default = null): array
+    {
+        $values = [];
+        foreach ($keys as $e) $values[] = $this->get($e, $default);
+        return $values;
     }
 
 }
