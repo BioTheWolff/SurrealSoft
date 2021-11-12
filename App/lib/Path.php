@@ -7,6 +7,13 @@ class Path
     const APP_DIR = __DIR__ . self::DS . '..' . self::DS;
     const ROOT_DIR = self::APP_DIR . '..' . self::DS;
 
+    private static function string_to_array($str): array
+    {
+        if (gettype($str) == 'array') return $str;
+        else if (gettype($str) == 'string') return [$str];
+        else throw new RuntimeException("Value provided is not a string");
+    }
+
     /**
      * Returns the path to a file in the project directory
      *
@@ -29,14 +36,20 @@ class Path
         return self::APP_DIR . implode(self::DS, $path) . ".php";
     }
 
+    public static function loadlib()
+    {
+        foreach (require('_libs.php') as $file) require_once($file);
+    }
+
     /**
      * Builds the path to a model
      *
-     * @param array $path the model's filename (+ dir(s) if needed)
+     * @param array|string $path the model's filename (+ dir(s) if needed)
      * @return string the built path to the model
      */
-    public static function model(array $path): string
+    public static function model($path): string
     {
+        $path = self::string_to_array($path);
         array_unshift($path, 'model');
         return self::getapp($path);
     }
@@ -44,11 +57,12 @@ class Path
     /**
      * Builds the path to a controller
      *
-     * @param array $path the controller's filename (+ dir(s) if needed)
+     * @param array|string $path the controller's filename (+ dir(s) if needed)
      * @return string the built path to the controller
      */
-    public static function controller(array $path): string
+    public static function controller($path): string
     {
+        $path = self::string_to_array($path);
         array_unshift($path, 'controller');
         return self::getapp($path);
     }
@@ -56,12 +70,13 @@ class Path
     /**
      * Builds the path to a view component (or main display)
      *
-     * @param array $path the view's filename
+     * @param array|string $path the view's filename
      * @param bool $is_content if the requested view is a content and not a template. default = TRUE
      * @return string the built path to the view
      */
-    public static function view(array $path, bool $is_content = true): string
+    public static function view($path, bool $is_content = true): string
     {
+        $path = self::string_to_array($path);
         if ($is_content) array_unshift($path, 'content');
         array_unshift($path, 'view');
         return self::getapp($path);
