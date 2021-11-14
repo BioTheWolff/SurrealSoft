@@ -36,9 +36,14 @@ class Path
         return self::APP_DIR . implode(self::DS, $path) . ".php";
     }
 
-    public static function loadlib()
+    public static function loadLibraries()
     {
         foreach (require('_libs.php') as $file) require_once($file);
+    }
+
+    public static function loadServices()
+    {
+        foreach (require(self::getapp(['services', '_services'])) as $file) require_once(self::getapp(['services', basename($file, '.php')]));
     }
 
     /**

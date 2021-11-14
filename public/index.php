@@ -2,7 +2,8 @@
 
 // load the library
 require_once '../App/lib/Path.php';
-Path::loadlib();
+Path::loadLibraries();
+Path::loadServices();
 
 
 // Sanity database check

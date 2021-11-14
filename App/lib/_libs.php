@@ -2,7 +2,7 @@
 
 /**
  * The libraries to load using loadlib
- * @see Path::loadlib()
+ * @see Path::loadLibraries()
  */
 return [
     'Config.php',
