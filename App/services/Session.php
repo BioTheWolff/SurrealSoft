@@ -31,6 +31,12 @@ class Session
         return $_SESSION[self::USER_PREFIX][$key] ?? $default;
     }
 
+    public static function unset_user_session()
+    {
+        self::ensureStarted();
+        if (self::is_connected()) unset($_SESSION[self::USER_PREFIX]);
+    }
+
 
     public static function is_connected(): bool
     {

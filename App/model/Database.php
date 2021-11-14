@@ -25,6 +25,8 @@ class Database
         }
     }
 
+
+
     private static function init_pdo()
     {
         $keys = ['database.adapter', 'database.host', 'database.dbname', 'database.user', 'database.pass', 'database.port'];
@@ -94,11 +96,22 @@ class Database
         return $query;
     }
 
+
+
     public static function selectAll(): array
     {
         $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename"));
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
+    }
+
+    public static function select(array $value): ?array
+    {
+        $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE :primary = :val"));
+        $stmt->execute(['val' => $value]);
+
+        $res = $stmt->fetchAll();
+        return $res[0] ?? null;
     }
 
 }
