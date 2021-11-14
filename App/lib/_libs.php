@@ -6,5 +6,6 @@
  */
 return [
     'Config.php',
-    'Sanity.php'
+    'Sanity.php',
+    'RenderEngine.php'
 ];

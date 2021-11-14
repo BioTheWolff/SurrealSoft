@@ -4,7 +4,7 @@
  * Class CRUDController
  * Abstract class that defines the CRUD design pattern to use
  */
-abstract class CRUDController
+interface ICRUD extends IGeneral
 {
 
     /**
@@ -13,7 +13,15 @@ abstract class CRUDController
      *
      * @return null
      */
-    public static abstract function create();
+    public static function created();
+
+    /**
+     * GET route
+     * Returns the creation form
+     *
+     * @return null
+     */
+    public static function create();
 
     /**
      * GET route
@@ -21,7 +29,7 @@ abstract class CRUDController
      *
      * @return null
      */
-    public static abstract function read();
+    public static function read();
 
     /**
      * GET route
@@ -29,7 +37,7 @@ abstract class CRUDController
      *
      * @return null
      */
-    public static abstract function readAll();
+    public static function readAll();
 
     /**
      * POST route
@@ -37,7 +45,15 @@ abstract class CRUDController
      *
      * @return null
      */
-    public static abstract function update();
+    public static function updated();
+
+    /**
+     * GET route
+     * Returns the update form
+     *
+     * @return null
+     */
+    public static function update();
 
     /**
      * POST route
@@ -45,6 +61,6 @@ abstract class CRUDController
      *
      * @return null
      */
-    public static abstract function delete();
+    public static function delete();
 
 }

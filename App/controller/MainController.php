@@ -1,10 +1,19 @@
 <?php
 
 
-class MainController
+class MainController implements IGeneral
 {
-    public static function database_error()
+
+    /**
+     * HOMEPAGE
+     */
+    public static function readAll()
     {
-        echo 'nope';
+        RenderEngine::render(self::get_controller_name(), 'home', "Accueil");
+    }
+
+    public static function get_controller_name(): string
+    {
+        return '';
     }
 }
