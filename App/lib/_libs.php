@@ -12,5 +12,6 @@ return [
 
     // functions files
     'functions.php',
-    'http_errors.php'
+    'http_errors.php',
+    'ensure.php'
 ];
