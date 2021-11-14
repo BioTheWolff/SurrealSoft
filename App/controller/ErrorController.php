@@ -14,7 +14,8 @@ class ErrorController implements IGeneral
 
     public static function database_error()
     {
-        echo 'nope';
+        http_response_code(503);
+        RenderEngine::render(self::get_controller_name(), 'database', 'Site en maintenance');
     }
 
     public static function http_404()
