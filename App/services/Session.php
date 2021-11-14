@@ -28,13 +28,21 @@ class Session
         self::ensureStarted();
 
         if (!self::is_connected()) return $default;
-        return $_SESSION[self::USER_PREFIX][$key] ?? $default;
+        return $_SESSION[self::USER_PREFIX]->get($key, $default);
     }
+
+
 
     public static function unset_user_session()
     {
         self::ensureStarted();
         if (self::is_connected()) unset($_SESSION[self::USER_PREFIX]);
+    }
+
+    public static function connect_user(Account $user)
+    {
+        self::ensureStarted();
+        $_SESSION[self::USER_PREFIX] = $user;
     }
 
 

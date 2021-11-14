@@ -105,12 +105,12 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
-    public static function select(array $value): ?array
+    public static function select(string $value)
     {
         $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE :primary = :val"));
         $stmt->execute(['val' => $value]);
 
-        $res = $stmt->fetchAll();
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
         return $res[0] ?? null;
     }
 

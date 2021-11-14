@@ -17,6 +17,15 @@ abstract class AbstractController
 
     protected static $controller_name = '';
 
+    /**
+     * Gets the view info from the given route.
+     * smart_render relies on this function, combined with the use of $routes, to map from function name
+     *
+     * @see AbstractController::$routes
+     * @see RenderEngine::smart_render()
+     * @param string $route
+     * @return mixed|null
+     */
     public static function get_route_view(string $route)
     {
         $route = preg_replace('/^(.+?)(ed)?$/', '\1', $route);

@@ -28,6 +28,14 @@ class RenderEngine
         require_once Path::view('view', false);
     }
 
+    /**
+     * Uses complex things to find the controller name and route view.
+     *
+     * DO NOT CALL FROM SOMETHING ELSE THAN A CONTROLLER!
+     *
+     * @param null $extra
+     * @param bool $comes_from_ensuring
+     */
     public static function smart_render($extra = null, bool $comes_from_ensuring = false)
     {
         // Complex things you don't need to know about

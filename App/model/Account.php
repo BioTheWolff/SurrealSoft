@@ -82,4 +82,9 @@ class Account extends Database
         return $this->nonce;
     }
 
+    public function get(string $parameter, $default = null)
+    {
+        return property_exists($this, $parameter) ? $this->$parameter : $default;
+    }
+
 }
