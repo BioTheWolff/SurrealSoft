@@ -50,4 +50,13 @@ class RenderEngine
         // It just works, believe me
         self::render($controller_name, $page_info[0], $page_info[1], $extra);
     }
+
+
+    /**
+     * Simple alias for the exit function
+     */
+    public static function end()
+    {
+        exit(0);
+    }
 }

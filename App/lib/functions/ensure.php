@@ -18,6 +18,31 @@ function ensure_user_permission(string $session_callable, array $args = null)
     if(!call_user_func("Session::$session_callable", $args)) http_403();
 }
 
+/**
+ * The opposite of ensure_user_permission.
+ * This function redirects the user to the given route if it doesn't possess the permission
+ *
+ * @see ensure_user_permission()
+ *
+ * @param string $session_callable the function to call in the Session class
+ * @param string|null $controller the controller to redirect to in case of failure
+ * @param string|null $action the action to make the client request in case of failure
+ * @param array|null $args the arguments to the function
+ */
+function redirect_if_no_permission(string $session_callable, string $controller = null, string $action = null, array $args = null)
+{
+    if(!call_user_func("Session::$session_callable", $args))
+    {
+        if (!is_null($controller) && !is_null($action)) $s = "?controller=$controller&action=$action";
+        else if (!is_null($controller)) $s = "?controller=$controller";
+        else if (!is_null($action)) $s = "?action=$action";
+        else $s = "";
+
+        header("Location: ./$s");
+        exit(0);
+    }
+}
+
 
 /**
  * Ensures that the form is full, and acts against it if
