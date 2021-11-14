@@ -24,10 +24,8 @@ function ensure_user_permission(string $session_callable, array $args = null)
  *
  * @param array $expected_keys the keys to expect in the form
  * @param array $form the form values
- * @param string $view_path the path to the displayed webpage if the form is not full
- * @param string $view_title the name of the webpage displayed if the form is not full
  */
-function ensure_form_full(array $expected_keys, array $form, string $controller_name, string $view_path, string $view_title)
+function ensure_form_full(array $expected_keys, array $form)
 {
     foreach ($expected_keys as $key)
     {
@@ -35,7 +33,7 @@ function ensure_form_full(array $expected_keys, array $form, string $controller_
         if (!array_key_exists($key, $form) || empty($form[$key]))
         {
             // we re-display the webpage with filled-in values
-            RenderEngine::_render($controller_name, $view_path, $view_title, $form);
+            RenderEngine::smart_render($form, true);
             exit(0); // we then exit to block further execution
         }
     }

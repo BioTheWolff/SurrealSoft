@@ -9,18 +9,18 @@ class ErrorController extends AbstractController
     public static function database_error()
     {
         http_response_code(503);
-        RenderEngine::_render(self::get_cn(), 'database', 'Site en maintenance');
+        RenderEngine::render(self::get_cn(), 'database', 'Site en maintenance');
     }
 
     public static function http_404()
     {
         http_response_code(404);
-        RenderEngine::_render(self::get_cn(), '404', 'Page non trouvée');
+        RenderEngine::render(self::get_cn(), '404', 'Page non trouvée');
     }
 
     public static function http_403()
     {
         http_response_code(403);
-        RenderEngine::_render(self::get_cn(), '403', 'Accès non autorisé');
+        RenderEngine::render(self::get_cn(), '403', 'Accès non autorisé');
     }
 }

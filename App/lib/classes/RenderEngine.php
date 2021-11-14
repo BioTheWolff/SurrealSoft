@@ -11,7 +11,7 @@ class RenderEngine
      * @param string $page_title the title of the page. Will be prefixed by the sites' title
      * @param array|null $extra extra variables to set up. Will be available in the view under `$rvar_extra_NAME`
      */
-    public static function _render(string $controller_name, string $page_path, string $page_title, array $extra = null)
+    public static function render(string $controller_name, string $page_path, string $page_title, array $extra = null)
     {
         $rvar_page_title = Config::getInstance()->get("site.name", "SurrealSoft") . " | " . $page_title;
         $rvar_load_content = $controller_name . DIRECTORY_SEPARATOR . $page_path;
@@ -28,8 +28,18 @@ class RenderEngine
         require_once Path::view('view', false);
     }
 
-    public static function render(string $controller_name, array $page_info, array $extra = null)
+    public static function smart_render($extra = null, bool $comes_from_ensuring = false)
     {
-        self::_render($controller_name, $page_info[0], $page_info[1], $extra);
+        // Complex things you don't need to know about
+        $limit = $comes_from_ensuring ? 3 : 2;
+        $trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, $limit)[$limit-1];
+        $class = $trace['class'];
+        $caller = $trace['function'];
+
+        $controller_name = $class::get_cn();
+        $page_info = $class::get_route_view($caller);
+
+        // It just works, believe me
+        self::render($controller_name, $page_info[0], $page_info[1], $extra);
     }
 }

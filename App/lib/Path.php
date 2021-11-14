@@ -38,7 +38,7 @@ class Path
 
     public static function getLoaderPath(): string
     {
-        return dirname(__FILE__) . "Loader.php";
+        return dirname(__FILE__) . self::DS . "Loader.php";
     }
 
     /**
