@@ -22,6 +22,7 @@ class MainController extends AbstractController
      */
     public static function connect()
     {
+        redirect_if_no_permission('is_not_connected');
         RenderEngine::smart_render();
     }
 
@@ -31,6 +32,7 @@ class MainController extends AbstractController
      */
     public static function connected()
     {
+        redirect_if_no_permission('is_not_connected');
         ensure_form_full(['email', 'password'], $_POST);
 
         /** @var Account|null $user */
@@ -40,6 +42,7 @@ class MainController extends AbstractController
         {
             // TODO: implement flashes
             RenderEngine::smart_render($_POST);
+            RenderEngine::end();
         }
 
         Session::connect_user($user);

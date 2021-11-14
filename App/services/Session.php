@@ -52,6 +52,11 @@ class Session
         return array_key_exists(self::USER_PREFIX, $_SESSION);
     }
 
+    public static function is_not_connected(): bool
+    {
+        return !self::is_connected();
+    }
+
     public static function is_admin(): bool
     {
         self::ensureStarted();
