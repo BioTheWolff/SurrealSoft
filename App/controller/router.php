@@ -20,5 +20,5 @@ if (
 }
 else
 {
-    ErrorController::query_error();
+    ErrorController::http_404();
 }
