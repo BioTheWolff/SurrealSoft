@@ -1,20 +1,15 @@
 <?php
 
 
-class MainController implements AbstractController
+class MainController extends AbstractController
 {
-
-    public static function _get_controller_name(): string
-    {
-        return '';
-    }
 
     /**
      * HOMEPAGE
      */
     public static function readAll()
     {
-        RenderEngine::_render(self::_get_controller_name(), 'home', "Accueil");
+        RenderEngine::_render(self::get_cn(), 'home', "Accueil");
     }
 
     /**
@@ -23,7 +18,7 @@ class MainController implements AbstractController
      */
     public static function connect()
     {
-        RenderEngine::_render(self::_get_controller_name(), 'login', 'Connexion');
+        RenderEngine::_render(self::get_cn(), 'login', 'Connexion');
     }
 
     /**
@@ -32,7 +27,7 @@ class MainController implements AbstractController
      */
     public static function connected()
     {
-        ensure_form_full(['email', 'password'], $_POST, self::_get_controller_name(), 'login', 'Connexion');
+        ensure_form_full(['email', 'password'], $_POST, self::get_cn(), 'login', 'Connexion');
 
         /** @var Account|null $user */
         $user = Account::select($_POST['email']);

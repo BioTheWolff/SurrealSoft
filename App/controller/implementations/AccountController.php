@@ -1,19 +1,10 @@
 <?php
 require_once Path::model('Account');
 
-class AccountController implements ICRUD
+class AccountController extends AbstractCRUDController
 {
 
-    public static function _get_controller_name(): string
-    {
-        return 'account';
-    }
-
-    public static function _get_bound_views(): array
-    {
-        return [];
-    }
-
+    protected static $controller_name = 'account';
 
     /**
      * @inheritDoc
@@ -45,7 +36,7 @@ class AccountController implements ICRUD
     public static function readAll()
     {
         ensure_user_permission('is_admin');
-        RenderEngine::_render(self::_get_controller_name(), 'list', 'Liste des utilisateurs',
+        RenderEngine::_render(self::get_cn(), 'list', 'Liste des utilisateurs',
             ['users' => Account::selectAll()]);
     }
 
