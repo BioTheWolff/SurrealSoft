@@ -6,7 +6,7 @@ Path::loadLibraries();
 Path::loadServices();
 
 // Initialise the session
-Session::getInstance();
+Session::init();
 
 
 // Sanity database check

@@ -11,10 +11,11 @@
  * The `$session_callable` is the Session method called: i.e. `'is_connected'` will call `Session::is_connected()`
  *
  * @param string $session_callable the function to call in the Session class
+ * @param array|null $args the arguments to the function
  */
-function ensure_user_permission(string $session_callable)
+function ensure_user_permission(string $session_callable, array $args = null)
 {
-    if(!Session::getInstance()->$session_callable()) http_403();
+    if(!call_user_func("Session::$session_callable", $args)) http_403();
 }
 
 
