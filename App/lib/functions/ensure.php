@@ -35,7 +35,7 @@ function ensure_form_full(array $expected_keys, array $form, string $controller_
         if (!array_key_exists($key, $form) || empty($form[$key]))
         {
             // we re-display the webpage with filled-in values
-            RenderEngine::render($controller_name, $view_path, $view_title, $form);
+            RenderEngine::_render($controller_name, $view_path, $view_title, $form);
             exit(0); // we then exit to block further execution
         }
     }

@@ -21,6 +21,11 @@ class Account extends Database
         $this->check_non_nullable_fields();
     }
 
+    public function password_matches(string $plain_password): bool
+    {
+        return password_verify($plain_password, $this->password);
+    }
+
     /**
      * @return mixed
      */

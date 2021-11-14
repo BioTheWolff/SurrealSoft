@@ -6,12 +6,12 @@
  */
 return [
     // library classes
-    'Config.php',
-    'Sanity.php',
-    'RenderEngine.php',
+    'classes/Config.php',
+    'classes/Sanity.php',
+    'classes/RenderEngine.php',
 
     // functions files
-    'functions.php',
-    'http_errors.php',
-    'ensure.php'
+    'functions/functions.php',
+    'functions/http_errors.php',
+    'functions/ensure.php'
 ];

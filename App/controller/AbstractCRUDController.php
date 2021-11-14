@@ -4,7 +4,7 @@
  * Class CRUDController
  * Abstract class that defines the CRUD design pattern to use
  */
-interface ICRUD extends IGeneral
+interface ICRUD extends AbstractController
 {
 
     /**

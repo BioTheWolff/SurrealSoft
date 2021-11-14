@@ -1,10 +1,10 @@
 <?php
 
 
-class MainController implements IGeneral
+class MainController implements AbstractController
 {
 
-    public static function get_controller_name(): string
+    public static function _get_controller_name(): string
     {
         return '';
     }
@@ -14,7 +14,7 @@ class MainController implements IGeneral
      */
     public static function readAll()
     {
-        RenderEngine::render(self::get_controller_name(), 'home', "Accueil");
+        RenderEngine::_render(self::_get_controller_name(), 'home', "Accueil");
     }
 
     /**
@@ -23,7 +23,7 @@ class MainController implements IGeneral
      */
     public static function connect()
     {
-        RenderEngine::render(self::get_controller_name(), 'login', 'Connexion');
+        RenderEngine::_render(self::_get_controller_name(), 'login', 'Connexion');
     }
 
     /**
@@ -32,10 +32,15 @@ class MainController implements IGeneral
      */
     public static function connected()
     {
-        ensure_form_full(['email', 'password'], $_POST, self::get_controller_name(), 'login', 'Connexion');
+        ensure_form_full(['email', 'password'], $_POST, self::_get_controller_name(), 'login', 'Connexion');
 
         /** @var Account|null $user */
         $user = Account::select($_POST['email']);
+
+        if (is_null($user) || !$user->password_matches($_POST['password']))
+        {
+
+        }
     }
 
     /**

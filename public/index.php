@@ -1,9 +1,12 @@
 <?php declare(strict_types=1);
 
-// load the library
+// load the primary library
 require_once '../App/lib/Path.php';
-Path::loadLibraries();
-Path::loadServices();
+require_once Path::getLoaderPath();
+
+// Load the full library and services
+Loader::loadLibraries();
+Loader::loadServices();
 
 // Initialise the session
 Session::init();
