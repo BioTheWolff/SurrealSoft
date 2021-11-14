@@ -38,9 +38,12 @@ class MainController extends AbstractController
 
         if (is_null($user) || !$user->password_matches($_POST['password']))
         {
-            echo "bad";
-            RenderEngine::smart_render();
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
         }
+
+        Session::connect_user($user);
+        header('Location: ./');
     }
 
     /**
