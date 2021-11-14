@@ -5,6 +5,9 @@ require_once '../App/lib/Path.php';
 Path::loadLibraries();
 Path::loadServices();
 
+// Initialise the session
+Session::getInstance();
+
 
 // Sanity database check
 require_once Path::model('Database');

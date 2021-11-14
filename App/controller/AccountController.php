@@ -38,6 +38,7 @@ class AccountController implements ICRUD
      */
     public static function readAll()
     {
+        ensure_user_permission('is_admin');
         RenderEngine::render(self::get_controller_name(), 'list', 'Liste des utilisateurs',
             ['users' => Account::selectAll()]);
     }

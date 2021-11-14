@@ -40,13 +40,3 @@ function rd(string $s): string
 {
     return rawurldecode($s);
 }
-
-
-/**
- * Generates a HTTP 403 request
- */
-function http_403()
-{
-    ErrorController::http_403();
-    exit(0);
-}

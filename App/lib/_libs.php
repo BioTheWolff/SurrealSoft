@@ -5,8 +5,12 @@
  * @see Path::loadLibraries()
  */
 return [
+    // library classes
     'Config.php',
     'Sanity.php',
     'RenderEngine.php',
-    'functions.php'
+
+    // functions files
+    'functions.php',
+    'http_errors.php'
 ];
