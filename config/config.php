@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'site.name' => 'SurrealSoft'
+    'site.name' => 'SurrealSoft',
+    'database.table.prefix' => "surrealsoft__",
 ];

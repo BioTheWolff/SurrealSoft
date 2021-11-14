@@ -1,7 +1,13 @@
 <?php
+require_once Path::model('Account');
 
 class AccountController implements ICRUD
 {
+
+    public static function get_controller_name(): string
+    {
+        return 'account';
+    }
 
     /**
      * @inheritDoc
@@ -32,7 +38,8 @@ class AccountController implements ICRUD
      */
     public static function readAll()
     {
-        // TODO: Implement readAll() method.
+        RenderEngine::render(self::get_controller_name(), 'list', 'Liste des utilisateurs',
+            ['users' => Account::selectAll()]);
     }
 
     /**
@@ -57,10 +64,5 @@ class AccountController implements ICRUD
     public static function delete()
     {
         // TODO: Implement delete() method.
-    }
-
-    public static function get_controller_name(): string
-    {
-        return 'account';
     }
 }

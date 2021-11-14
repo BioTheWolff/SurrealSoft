@@ -7,5 +7,6 @@
 return [
     'Config.php',
     'Sanity.php',
-    'RenderEngine.php'
+    'RenderEngine.php',
+    'functions.php'
 ];

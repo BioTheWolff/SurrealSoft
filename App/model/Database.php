@@ -9,8 +9,21 @@ class Database
      */
     private static $pdo;
 
-    private static $tablename = null;
-    private static $primarykey = null;
+    protected static $tablename = null;
+    protected static $primarykey = null;
+
+    protected static $non_nullable_fields = [];
+
+    /**
+     * Called from the children classes' constructor to check that all fields were filled by PDO
+     */
+    protected function check_non_nullable_fields()
+    {
+        foreach (static::$non_nullable_fields as $field)
+        {
+            if (is_null($this->$field)) throw new RuntimeException("Field $field is null.");
+        }
+    }
 
     private static function init_pdo()
     {
@@ -50,17 +63,19 @@ class Database
      * Warning: Only associative array keys are used. This method is prepared to recieve the `$_POST` or `$_GET` arrays
      *
      * @param string $query the prepared string to fill in
-     * @param array $arr the array to give. See above for details.
+     * @param array|null $arr the array to give. See above for details.
      * @return string the prepared SQL statement query
      */
-    private static function prepare_statement(string $query, array $arr): string
+    private static function prepare_statement(string $query, array $arr = null): string
     {
         if (is_null(static::$tablename) || is_null(static::$primarykey))
         {
             throw new RuntimeException("No redefinition of table name or primary key in class " . static::class);
         }
 
-        $query = str_replace(':primary', static::$primarykey, str_replace(':tablename', static::$tablename, $query));
+        $query = str_replace(':primary', static::$primarykey,
+            str_replace(':tablename', Config::getInstance()->get("database.table.prefix", "") . static::$tablename, $query)
+        );
 
         if (strpos($query, ":updatearr=''") !== false)
         {
@@ -77,6 +92,13 @@ class Database
         }
 
         return $query;
+    }
+
+    public static function selectAll(): array
+    {
+        $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename"));
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
 }

@@ -11,8 +11,8 @@ require_once Path::model('Database');
 if (!Sanity::check_database())
 {
     // a problem with the database occured
-    require_once Path::controller('MainController');
-    MainController::database_error();
+    require_once Path::controller('ErrorController');
+    ErrorController::database_error();
     exit(0);
 }
 else
