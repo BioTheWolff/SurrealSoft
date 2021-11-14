@@ -36,7 +36,7 @@ class AccountController extends AbstractCRUDController
     public static function readAll()
     {
         ensure_user_permission('is_admin');
-        RenderEngine::_render(self::get_cn(), 'list', 'Liste des utilisateurs',
+        RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
             ['users' => Account::selectAll()]);
     }
 
