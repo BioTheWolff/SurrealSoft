@@ -56,7 +56,8 @@ class AccountController implements ICRUD
      */
     public static function update()
     {
-        // TODO: Implement update() method.
+        ensure_user_permission('is_owner', [$_GET['email']]);
+        // insérer fonction ici
     }
 
     /**

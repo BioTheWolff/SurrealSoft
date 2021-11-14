@@ -43,4 +43,9 @@ class Session
         self::ensureStarted();
         return self::is_connected() && self::get("admin", false);
     }
+
+    public static function is_owner(string $owner_email): bool
+    {
+        return self::is_admin() || self::get("email") == $owner_email;
+    }
 }
