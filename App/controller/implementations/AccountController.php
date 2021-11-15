@@ -9,7 +9,7 @@ class AccountController extends AbstractCRUDController
     /**
      * @inheritDoc
      */
-    public static function created()
+    public static function create_()
     {
         // TODO: Implement created() method.
     }
@@ -43,7 +43,7 @@ class AccountController extends AbstractCRUDController
     /**
      * @inheritDoc
      */
-    public static function updated()
+    public static function update_()
     {
         // TODO: Implement updated() method.
     }

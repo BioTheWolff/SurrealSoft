@@ -28,7 +28,7 @@ abstract class AbstractController
      */
     public static function get_route_view(string $route)
     {
-        $route = preg_replace('/^(.+?)(ed)?$/', '\1', $route);
+        $route = preg_replace('/^(.+?)(_)?$/', '\1', $route);
         return array_key_exists($route, static::$routes) ? static::$routes[$route] : null;
     }
 
