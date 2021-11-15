@@ -13,7 +13,7 @@ abstract class AbstractCRUDController extends AbstractController
      *
      * @return null
      */
-    public static abstract function created();
+    public static abstract function create_();
 
     /**
      * GET route
@@ -45,7 +45,7 @@ abstract class AbstractCRUDController extends AbstractController
      *
      * @return null
      */
-    public static abstract function updated();
+    public static abstract function update_();
 
     /**
      * GET route

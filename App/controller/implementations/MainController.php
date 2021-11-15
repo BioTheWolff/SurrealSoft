@@ -30,7 +30,7 @@ class MainController extends AbstractController
      * POST route
      * Process the login form
      */
-    public static function connected()
+    public static function connect_()
     {
         redirect_if_no_permission('is_not_connected');
         ensure_form_full(['email', 'password'], $_POST);
