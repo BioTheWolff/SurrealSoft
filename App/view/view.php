@@ -14,7 +14,16 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
 </head>
 <body>
     <header>
-
+        <nav>
+            <ul>
+                <li>
+                    <button id="catalogue" class="menu" onclick="openPage()">Catalogue</button>
+                    <button id="panier" class="menu" onclick="openPage()">Panier</button>
+                    <button id="contact" class="menu" onclick="openPage()">Contact</button>
+                    <button id="profil" class="menu" onclick="openPage()">Profil</button>
+                </li>
+            </ul>
+        </nav>
     </header>
 
     <main>
@@ -22,7 +31,9 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
     </main>
 
     <footer>
-
+        <p style="border: 1px solid black;text-align:right;padding-right:1em;">
+            Site réalisé par S.ROBERT - N.TARBOURIECH - F.ZOCCOLA
+        </p>
     </footer>
 </body>
 </html>
