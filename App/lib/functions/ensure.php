@@ -33,13 +33,7 @@ function redirect_if_no_permission(string $session_callable, string $controller 
 {
     if(!call_user_func("Session::$session_callable", $args))
     {
-        if (!is_null($controller) && !is_null($action)) $s = "?controller=$controller&action=$action";
-        else if (!is_null($controller)) $s = "?controller=$controller";
-        else if (!is_null($action)) $s = "?action=$action";
-        else $s = "";
-
-        header("Location: ./$s");
-        exit(0);
+        redirect($controller, $action);
     }
 }
 
