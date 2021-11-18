@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'Session.php'
+    'Session.php',
+    'Cart.php'
 ];
