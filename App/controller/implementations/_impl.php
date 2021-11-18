@@ -3,5 +3,6 @@
 return [
     'AccountController.php',
     'ErrorController.php',
-    'MainController.php'
+    'MainController.php',
+    'ProductController.php'
 ];

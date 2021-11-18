@@ -28,7 +28,7 @@ class Session
         self::ensureStarted();
 
         if (!self::is_connected()) return $default;
-        return $_SESSION[self::USER_PREFIX]->get($key, $default);
+        return unserialize($_SESSION[self::USER_PREFIX])->get($key, $default);
     }
 
 
@@ -42,7 +42,7 @@ class Session
     public static function connect_user(Account $user)
     {
         self::ensureStarted();
-        $_SESSION[self::USER_PREFIX] = $user;
+        $_SESSION[self::USER_PREFIX] = serialize($user);
     }
 
 
