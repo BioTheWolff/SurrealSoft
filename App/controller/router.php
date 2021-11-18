@@ -18,7 +18,7 @@ if ($_has_database_error ?? false)
 // main handle
 if (
     class_exists($class = (ucfirst($_GET['controller'] ?? 'main') . "Controller")) &&
-    method_exists($class, $action = $_GET['action'] ?? 'readAll') &&
+    method_exists($class, $action = $_GET['action'] ?? '_default') &&
     $class != 'ErrorController' && // forbid reading errors
     !method_exists(AbstractController::class, $action) // forbid reading the IGeneral functions, used as utils
 )

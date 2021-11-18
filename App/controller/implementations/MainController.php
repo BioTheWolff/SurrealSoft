@@ -11,7 +11,7 @@ class MainController extends AbstractController
     /**
      * HOMEPAGE
      */
-    public static function readAll()
+    public static function _default()
     {
         RenderEngine::render(self::get_cn(), 'home', "Accueil");
     }
