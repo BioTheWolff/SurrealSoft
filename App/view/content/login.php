@@ -1,5 +1,5 @@
 
-<form action="?action=connected" method="post">
+<form action="?action=connect_" method="post">
     <label>E-mail
         <input type="email" name="email" value="<?= $rvar_extra_email ?? '' ?>" required>
     </label>
