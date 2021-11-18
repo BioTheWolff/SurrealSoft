@@ -42,4 +42,13 @@ abstract class AbstractController
     {
         return static::$controller_name;
     }
+
+    /**
+     * The default route of the controller
+     */
+    public static function _default()
+    {
+        echo 'No default route implemented';
+        exit(0);
+    }
 }
