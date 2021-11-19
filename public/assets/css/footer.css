@@ -1,0 +1,10 @@
+footer {
+    background-color: #BBB;
+    height: 4vh;
+    display: flex;
+    justify-content: center;
+}
+
+footer > * {
+    margin: auto 0;
+}
