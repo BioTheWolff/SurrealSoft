@@ -68,7 +68,7 @@ class Database
      * @param array|null $arr the array to give. See above for details.
      * @return string the prepared SQL statement query
      */
-    private static function prepare_statement(string $query, array $arr = null): string
+    protected static function prepare_statement(string $query, array $arr = null): string
     {
         if (is_null(static::$tablename) || is_null(static::$primarykey))
         {
@@ -102,17 +102,6 @@ class Database
     {
         $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename"));
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
-    }
-
-    public static function selectSome(array $in_array): array
-    {
-        if (empty($in_array)) return [];
-
-        $in = str_repeat('?,', count($in_array) - 1) . '?';
-        $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE :primary IN ($in)"));
-        $stmt->execute($in_array);
-
         return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 

@@ -33,4 +33,15 @@ class CartProduct extends Product
     {
         return $this->price * $this->quantity;
     }
+
+    public static function selectProductsById(array $in_array): array
+    {
+        if (empty($in_array)) return [];
+
+        $in = str_repeat('?,', count($in_array) - 1) . '?';
+        $stmt = self::getPDO()->prepare(parent::prepare_statement("SELECT * FROM :tablename WHERE id IN ($in)"));
+        $stmt->execute($in_array);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
+    }
 }
