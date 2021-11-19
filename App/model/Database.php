@@ -105,6 +105,17 @@ class Database
         return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
     }
 
+    public static function selectSome(array $in_array): array
+    {
+        if (empty($in_array)) return [];
+
+        $in = str_repeat('?,', count($in_array) - 1) . '?';
+        $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE :primary IN ($in)"));
+        $stmt->execute($in_array);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
+    }
+
     public static function select(string $value)
     {
         $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE :primary = :val"));
