@@ -10,11 +10,36 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="./assets/css/general.css">
+    <link rel="stylesheet" href="./assets/css/header.css">
+    <link rel="stylesheet" href="./assets/css/footer.css">
+
     <title><?= $rvar_page_title ?></title>
 </head>
 <body>
-    <header>
+    <header class="nav">
+        <div class="nav-start">
+            <a href="./" class="btn btn-link">Accueil</a>
+            <a href="?controller=product" class="btn btn-link">Produits</a>
+        </div>
 
+        <div class="nav-brand text-center">
+            <a href="./"><img src="./assets/img/logo.png" alt="SurrealSoft"></a>
+            <p>Des logiciels pour un monde meilleur</p>
+        </div>
+
+        <div class="nav-end">
+            <a href="?controller=cart" class="btn btn-link">Panier</a>
+
+            <!-- espace de connexion/inscription -->
+            <?php if(Session::is_connected()): ?>
+                <a href="?action=logout" class="btn btn-link">Se déconnecter</a>
+            <?php else: ?>
+                <a href="#" class="btn">S'inscrire</a>
+                <a href="?action=connect" class="btn btn-link">Se connecter</a>
+            <?php endif ?>
+        </div>
     </header>
 
     <main>
@@ -22,7 +47,9 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
     </main>
 
     <footer>
-
+        <div class="text-center">
+            Site réalisé par Suzanne R. - Noé T. - Fabien Z.
+        </div>
     </footer>
 </body>
 </html>

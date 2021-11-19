@@ -1,0 +1,26 @@
+header.nav {
+    height: 10vh;
+    padding: 1vh 1vw;
+    background-color: #BBB;
+
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+header.nav > *
+{
+    display: flex;
+    flex: 1 0 0;
+    align-items: center;
+    margin: auto 0;
+}
+
+.nav-end { justify-content: flex-end; }
+
+.nav-brand
+{
+    flex-grow: 0;
+    flex-direction: column;
+    font-size: 1.05rem;
+}
