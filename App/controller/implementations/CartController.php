@@ -1,5 +1,5 @@
 <?php
-
+require_once Path::model('CartProduct');
 
 class CartController extends AbstractController
 {

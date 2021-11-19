@@ -9,7 +9,7 @@ abstract class AbstractCRUDController extends AbstractController
 
     public static function _default()
     {
-        self::readAll();
+        static::readAll();
     }
 
     /**
