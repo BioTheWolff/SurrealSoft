@@ -14,7 +14,7 @@ class CartController extends AbstractController
     public static function display()
     {
         RenderEngine::render(self::get_cn(), 'display', 'Panier',
-            ['cart_items' => Cart::add_product_quantities(CartProduct::selectProductsById(Cart::get_items()))]);
+            ['cart_items' => Cart::add_product_quantities(CartProduct::selectSome(Cart::get_items()))]);
     }
 
     public static function add()
