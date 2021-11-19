@@ -2,7 +2,7 @@
 require_once Path::model('Product');
 
 
-class ProductController extends AbstractController
+class ProductController extends AbstractCRUDController
 {
 
     protected static $controller_name = 'product';
