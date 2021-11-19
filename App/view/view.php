@@ -14,7 +14,7 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
 </head>
 <body>
     <header>
-        <?= Session::is_connected() ?>
+
     </header>
 
     <main>
