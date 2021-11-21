@@ -18,6 +18,7 @@ class ProductController extends AbstractCRUDController
     public static function create_()
     {
         ensure_user_permission('is_admin');
+        self::sanitize_product();
         self::eval_image();
 
         $a = array_merge(['form_action' => 'create_'], $_POST);
@@ -75,6 +76,7 @@ class ProductController extends AbstractCRUDController
     public static function update_()
     {
         ensure_user_permission('is_admin');
+        self::sanitize_product();
         self::eval_image();
 
         $a = array_merge(['form_action' => 'update_', 'is_update' => true, 'product' => Product::select($_POST['slug'] ?? '')], $_POST);
@@ -108,6 +110,13 @@ class ProductController extends AbstractCRUDController
     {
         ensure_user_permission('is_admin');
         // TODO: Implement delete() method.
+    }
+
+    private static function sanitize_product()
+    {
+        if (array_key_exists('name', $_POST)) $_POST['name'] = trim($_POST['name']);
+        if (array_key_exists('slug', $_POST)) $_POST['slug'] = trim($_POST['slug']);
+        if (array_key_exists('description', $_POST) && empty(trim($_POST['description']))) $_POST['description'] = null;
     }
 
     private static function eval_image()

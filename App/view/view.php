@@ -17,6 +17,7 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
     <link rel="stylesheet" href="./assets/css/general.css">
     <link rel="stylesheet" href="./assets/css/header.css">
     <link rel="stylesheet" href="./assets/css/footer.css">
+    <link rel="stylesheet" href="./assets/css/content.css">
 
     <title><?= $rvar_page_title ?></title>
 </head>
@@ -38,7 +39,7 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
             <?php if(Session::is_connected()): ?>
                 <a href="?action=logout" class="btn btn-link">Se déconnecter</a>
             <?php else: ?>
-                <a href="#" class="btn">S'inscrire</a>
+                <a href="#" class="btn btn-primary">S'inscrire</a>
                 <a href="?action=connect" class="btn btn-link">Se connecter</a>
             <?php endif ?>
         </div>
