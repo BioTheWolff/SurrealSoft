@@ -3,13 +3,13 @@ $rvar_extra_products = $rvar_extra_products ?? [];
 ?>
 
 <?php if(Session::is_admin()): ?>
-<a href="<?= loc($rvar_cn ?? null, 'create') ?>">Ajouter un produit</a>
+<a href="<?= loc($rvar_cn ?? null, 'create') ?>" class="btn btn-link">Ajouter un produit</a>
 <?php endif; ?>
 
+<h2>Produits</h2>
 <?php if(empty($rvar_extra_products)): ?>
     <div class="no-content">Désolé, mais aucun produit n'est disponible.</div>
 <?php else: ?>
-    <h2>Produits</h2>
     <?php
         foreach ($rvar_extra_products as $product):
             /** @var Product $product */
@@ -20,9 +20,9 @@ $rvar_extra_products = $rvar_extra_products ?? [];
                 <img src="<?= !is_null($product->getCover()) ? "data:image/png;base64,{$product->getCover()}" : "https://via.placeholder.com/150.png?text={$url_name}" ?>" alt="<?= $product->getName() ?>">
             </div>
             <div class="product-description">
-                <div><h3><?= $product->getName() ?></h3></div>
+                <div><a href="<?= loc('product', 'read', ['product' => re($product->getSlug())]) ?>" class="btn btn-invisible"><h3><?= $product->getName() ?></h3></a></div>
                 <div class="content">
-                    <div>
+                    <div class="<?= is_null($product->getDescription()) ? 'slanted' : '' ?>">
                         <?= $product->getDescription() ?? 'Aucune description pour ce produit.' ?>
                     </div>
                     <div>

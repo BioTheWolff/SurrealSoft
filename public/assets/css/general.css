@@ -42,10 +42,21 @@ body > main
 
 
 /* GENERAL PROPERTIES */
+.slanted {
+    font-style: italic;
+}
 
 .text-center {
     text-align: center;
 }
+
+.m-10 {
+    margin: 10px;
+}
+
+
+
+/* BUTTONS */
 
 .btn {
     display: inline-block;
@@ -55,6 +66,13 @@ body > main
     border: 1px solid;
     transition: background-color .1s;
     text-decoration: none;
+}
+
+.btn-invisible {
+    display: inline;
+    padding: initial;
+    margin: initial;
+    border: none;
 }
 
 .btn, .btn:visited { color: var(--text-color); }
