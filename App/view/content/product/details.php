@@ -1,4 +1,5 @@
 <?php
+
 /** @var Product $p */
 $p = $rvar_extra_product ?? null;
 ?>
