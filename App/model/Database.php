@@ -86,11 +86,18 @@ class Database
             $query = str_replace(":updatearr=''", trim($s, ','), $query);
         }
 
-        if (strpos($query, ':insertarr') !== false)
+        if (strpos($query, ':insertkeys') !== false)
         {
-            $s = "(";
+            $s = "";
+            foreach ($arr as $k => $v) $s .= "$k,";
+            $query = str_replace(":insertkeys", trim($s, ','), $query);
+        }
+
+        if (strpos($query, ':insertvals') !== false)
+        {
+            $s = "";
             foreach ($arr as $k => $v) $s .= ":$k,";
-            $query = str_replace(":updatearr=''", trim($s, ',') . ")", $query);
+            $query = str_replace(":insertvals", trim($s, ','), $query);
         }
 
         return $query;
@@ -123,6 +130,27 @@ class Database
 
         $res = $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
         return $res[0] ?? null;
+    }
+
+    public static function exists(string $value): bool
+    {
+        return !is_null(static::select($value));
+    }
+
+    public static function create(array $values): bool
+    {
+        $stmt = self::getPDO()->prepare(self::prepare_statement("INSERT INTO :tablename (:insertkeys) VALUES (:insertvals)", $values));
+        $stmt->execute($values);
+
+        return $stmt->rowCount() > 0;
+    }
+
+    public static function update(array $values): bool
+    {
+        $stmt = self::getPDO()->prepare(self::prepare_statement("UPDATE :tablename SET :updatearr='' WHERE :primary = ::primary", $values));
+        $stmt->execute($values);
+
+        return $stmt->rowCount() > 0;
     }
 
 }

@@ -2,6 +2,10 @@
 $rvar_extra_products = $rvar_extra_products ?? [];
 ?>
 
+<?php if(Session::is_admin()): ?>
+<a href="<?= loc($rvar_cn ?? null, 'create') ?>">Ajouter un produit</a>
+<?php endif; ?>
+
 <?php if(empty($rvar_extra_products)): ?>
     <div>No products to display!</div>
 <?php else: ?>
