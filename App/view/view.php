@@ -25,8 +25,7 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
         </div>
 
         <div class="nav-brand text-center">
-            <a href="./"><img src="./assets/img/logo.png" alt="SurrealSoft"></a>
-            <p>Des logiciels pour un monde meilleur</p>
+            <a href="./"><div><img src="./assets/img/logo.png" alt="SurrealSoft"></div></a>
         </div>
 
         <div class="nav-end">
