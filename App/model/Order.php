@@ -88,10 +88,11 @@ class Order extends Database
         if ($o_stmt->rowCount() == 0) return false;
 
         // get the order id
-        $id_stmt = self::getPDO()->prepare(self::prepare_statement("SELECT id FROM :tablename WHERE clientId = :cid AND date = :d"));
+        $id_stmt = self::getPDO()->prepare(self::prepare_statement("SELECT id FROM :tablename WHERE clientId = :clientId AND date = :date"));
         $id_stmt->execute($values);
-        $orderId = $id_stmt->fetch();
+        $orderId = $id_stmt->fetch(PDO::FETCH_NUM);
         if ($orderId === false) return false;
+        $orderId = $orderId[0];
 
 
         // prepare the products' insertion in the association table
