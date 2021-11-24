@@ -26,6 +26,7 @@ class CartController extends AbstractController
     public static function remove()
     {
         Cart::remove($_GET['product'], $_GET['quantity'] ?? 1);
+        redirect('cart');
     }
 
 }

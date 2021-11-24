@@ -51,17 +51,41 @@ function rd(string $s): string
  */
 function redirect(string $controller = null, string $action = null, array $args = null)
 {
+    $location = get_path_fragment($controller, $action, $args);
+    header("Location: ./$location");
+    exit(0);
+}
+
+/**
+ * Alias to the get_path_fragment function
+ *
+ * @see get_path_fragment()
+ */
+function loc(string $controller = null, string $action = null, array $extra = null): string
+{
+    return get_path_fragment($controller, $action, $extra);
+}
+
+/**
+ * @param string|null $controller the controller
+ * @param string|null $action the action
+ * @param array|null $extra the optional arguments to add
+ * @return string
+ */
+function get_path_fragment(string $controller = null, string $action = null, array $extra = null): string
+{
     $s = "?";
 
     // controller & action
     if (!is_null($controller) && !is_null($action)) $s .= "controller=$controller&action=$action";
     else if (!is_null($controller)) $s .= "controller=$controller";
     else if (!is_null($action)) $s .= "action=$action";
+    else $s = "";
 
     // extra arguments, if any
-    if (!is_null($args))
+    if (!is_null($extra))
     {
-        foreach ($args as $k => $v)
+        foreach ($extra as $k => $v)
         {
             $s .= "&$k=$v";
         }
@@ -70,6 +94,5 @@ function redirect(string $controller = null, string $action = null, array $args 
     // if nothing was provided
     if ($s === "?") $s = "";
 
-    header("Location: ./$s");
-    exit(0);
+    return $s;
 }

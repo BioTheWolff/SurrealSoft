@@ -11,11 +11,13 @@ class Product extends Database
     protected $name;
     protected $description;
     protected $price;
+    protected $cover;
 
     protected static $non_nullable_fields = ['id', 'slug', 'name', 'price'];
 
-    public function __construct()
+    public function __construct($pass_check = false)
     {
+        if ($pass_check) return;
         $this->check_non_nullable_fields();
     }
 
@@ -57,6 +59,14 @@ class Product extends Database
     public function getPrice()
     {
         return $this->price;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCover()
+    {
+        return $this->cover;
     }
 
     public function get(string $parameter, $default = null)

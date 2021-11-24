@@ -24,3 +24,8 @@ header.nav > *
     flex-direction: column;
     font-size: 1.05rem;
 }
+
+.nav-brand * {
+    width: auto;
+    height: 8vh;
+}

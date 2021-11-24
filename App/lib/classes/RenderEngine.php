@@ -13,18 +13,34 @@ class RenderEngine
      */
     public static function render(string $controller_name, string $page_path, string $page_title, array $extra = null)
     {
+        // define "basic" variables
+        $rvar_cn = $controller_name;
         $rvar_page_title = Config::getInstance()->get("site.name", "SurrealSoft") . " | " . $page_title;
         $rvar_load_content = $controller_name . DIRECTORY_SEPARATOR . $page_path;
 
+        // define extra variables
         if(!is_null($extra))
         {
             foreach ($extra as $k => $v)
             {
+
                 $_name = "rvar_extra_" . $k;
                 $$_name = $v;
             }
         }
 
+        // define useful functions
+        function v(string $var_name): string
+        {
+            return "rvar_extra_$var_name";
+        }
+
+        function reqred(bool $is_update): string
+        {
+            return $is_update ? 'readonly' : 'required';
+        }
+
+        // apply the view
         require_once Path::view('view', false);
     }
 
