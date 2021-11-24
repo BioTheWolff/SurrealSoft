@@ -1,5 +1,6 @@
 <?php
 require_once Path::model('Order');
+require_once Path::model('OrderedProduct');
 
 
 class OrderController extends AbstractCrudController
@@ -12,7 +13,7 @@ class OrderController extends AbstractCrudController
      */
     public static function create_()
     {
-        // TODO: Implement created() method.
+
     }
 
     /**
@@ -20,7 +21,15 @@ class OrderController extends AbstractCrudController
      */
     public static function create()
     {
-        // TODO: Implement create() method.
+        // be sure that the user has an account
+        // even though the cart is independant from being connected to an account
+        redirect_if_no_permission('is_connected', null, 'connect');
+
+        // use the user ID to create the order
+        Order::createOrder(Session::get('id'), get_cart_products());
+
+        // empty the user's cart
+        Cart::flush_cart();
     }
 
     /**

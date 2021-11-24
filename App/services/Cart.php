@@ -76,4 +76,11 @@ class Cart
 
         return $products;
     }
+
+    public static function flush_cart()
+    {
+        self::ensureStarted();
+
+        if (!self::is_empty()) $_SESSION[self::CART_PREFIX] = [];
+    }
 }
