@@ -10,8 +10,9 @@ class Order extends Database
     protected $clientId;
     protected $date;
     protected $amount;
+    protected $productsCount;
 
-    protected static $non_nullable_fields = ['id', 'clientId', 'date', 'amount'];
+    protected static $non_nullable_fields = ['id', 'clientId', 'date'];
 
     public function __construct()
     {
@@ -48,6 +49,14 @@ class Order extends Database
     public function getAmount()
     {
         return $this->amount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProductsCount()
+    {
+        return $this->productsCount;
     }
 
     public function get(string $parameter, $default = null)
