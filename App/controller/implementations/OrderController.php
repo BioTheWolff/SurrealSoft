@@ -13,7 +13,8 @@ class OrderController extends AbstractCrudController
      */
     public static function create_()
     {
-
+        // TODO: implement the "order completed" page
+        redirect(); // for now, redirects to homepage
     }
 
     /**
@@ -30,6 +31,9 @@ class OrderController extends AbstractCrudController
 
         // empty the user's cart
         Cart::flush_cart();
+
+        // redirect to the "order completed" page
+        redirect('order', 'create_');
     }
 
     /**
