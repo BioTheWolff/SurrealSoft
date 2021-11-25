@@ -45,6 +45,14 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
         </div>
     </header>
 
+    <?php if (Neon::has_flashes()): ?>
+        <div class="flashes-container">
+            <?php foreach (Neon::get_flashes() as $flash): ?>
+                <div class="flash <?= $flash['type'] ?>"><?= $flash['message'] ?></div>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
     <main>
         <?php require_once Path::view($rvar_load_content) ?>
     </main>

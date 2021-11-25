@@ -25,10 +25,14 @@ class Neon
         return array_key_exists(self::FLASH_PREFIX, $_SESSION) && !empty($_SESSION[self::FLASH_PREFIX]);
     }
 
-    public static function get_flashes(): array
+    public static function get_flashes(bool $keep = false): array
     {
         self::ensureStarted();
-        return $_SESSION[self::FLASH_PREFIX];
+
+        $flashes = $_SESSION[self::FLASH_PREFIX];
+        if (!$keep) unset($_SESSION[self::FLASH_PREFIX]);
+
+        return $flashes;
     }
 
 
