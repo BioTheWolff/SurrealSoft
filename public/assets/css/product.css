@@ -1,0 +1,50 @@
+
+/* POSITION MARKER */
+.position {
+    display: inline;
+    padding: 10px;
+    background-color: #CCC;
+    border-radius: 10px;
+    margin-bottom: 5vh;
+}
+
+/* PRODUCT */
+.prd {
+    display: flex;
+    width: 80%;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* PRODUCT COVER */
+.prd .cover {
+    display: flex;
+    width: 40%;
+    justify-content: center;
+
+}
+.prd .cover img {
+    width: 50%;
+}
+
+/* PRODUCT INFOBOX */
+.prd .info {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.prd .info h2 {
+    margin: unset;
+}
+.prd .info .box {
+    padding: 2vw;
+    background-color: #CCC;
+    border-radius: 10px;
+    width: max-content;
+    max-width: 30vw;
+}
+.prd .info .btn {
+    margin: 20px 0px 0px 0px;
+}
