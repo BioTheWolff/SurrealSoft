@@ -5,7 +5,7 @@
     </label>
 
     <label>Mot de passe
-        <input type="password" name="password" value="<?= $rvar_extra_password ?? '' ?>" required>
+        <input type="password" name="password" required>
     </label>
 
     <input type="submit" value="Se connecter">

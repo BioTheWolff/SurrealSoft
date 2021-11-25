@@ -6,12 +6,55 @@ class AccountController extends AbstractCRUDController
 
     protected static $controller_name = 'account';
 
+    protected static $routes = [
+        'create' => ['create', 'Inscription']
+    ];
+
     /**
      * @inheritDoc
      */
     public static function create_()
     {
-        // TODO: Implement created() method.
+        redirect_if_no_permission('is_not_connected');
+        ensure_form_full(['firstname', 'lastname', 'email', 'password', 'password_confirm'], $_POST);
+
+        // pattern email
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        // unicité email
+        if (!is_null(Account::select($_POST['email']))) {
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        // égalité mot de passe
+        if ($_POST['password'] != $_POST['password_confirm']) {
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        // pattern mot de passe
+        if (!preg_match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", $_POST['email'])) {
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        // test dictionary.php
+        if (in_array($_POST['password'], (require Path::get(['config', 'dictionary'])))) {
+            // TODO: implement flashes
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        // hach le mot de passe pour le mettre dans la base de données
+        //$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     }
 
     /**
@@ -19,7 +62,8 @@ class AccountController extends AbstractCRUDController
      */
     public static function create()
     {
-        // TODO: Implement create() method.
+        redirect_if_no_permission('is_not_connected');
+        RenderEngine::smart_render();
     }
 
     /**
