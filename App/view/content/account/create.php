@@ -15,7 +15,7 @@
 
     <label>
         Mot de passe :
-        <input id="password" type="password" name="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+        <input id="password" type="password" name="password"
                title="8 caractères au minimum, au moins un chiffre, une majuscule, une minuscule et un caractère spécial" required>
     </label>
 

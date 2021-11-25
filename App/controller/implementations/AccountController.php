@@ -20,41 +20,59 @@ class AccountController extends AbstractCRUDController
 
         // pattern email
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-            // TODO: implement flashes
+            Neon::error("L'email est invalide.");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
 
         // unicité email
         if (!is_null(Account::select($_POST['email']))) {
-            // TODO: implement flashes
+            Neon::error("Un compte est déjà associé à cet email.");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
 
         // égalité mot de passe
         if ($_POST['password'] != $_POST['password_confirm']) {
-            // TODO: implement flashes
+            Neon::error("Les mots de passe ne correspondent pas.");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
 
         // pattern mot de passe
-        if (!preg_match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", $_POST['email'])) {
-            // TODO: implement flashes
+        if (!preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/", $_POST['password'])) {
+            Neon::error("Le mot de passe ne remplit pas les critères demandés");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
 
         // test dictionary.php
         if (in_array($_POST['password'], (require Path::get(['config', 'dictionary'])))) {
-            // TODO: implement flashes
+            Neon::error("Le mot de passe est trop faible.");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
 
         // hach le mot de passe pour le mettre dans la base de données
-        //$password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+        $res = Account::create([
+            'firstname' => $_POST['firstname'],
+            'lastname' => $_POST['lastname'],
+            'email' => $_POST['email'],
+            'password' => $hash,
+            'nonce' => null
+        ]);
+
+        // database failure
+        if (!$res)
+        {
+            Neon::error("Erreur de la base de données.");
+            RenderEngine::smart_render($_POST);
+            RenderEngine::end();
+        }
+
+        redirect();
     }
 
     /**
