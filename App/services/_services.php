@@ -2,5 +2,6 @@
 
 return [
     'Session.php',
-    'Cart.php'
+    'Cart.php',
+    'Neon.php'
 ];

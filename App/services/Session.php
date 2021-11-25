@@ -65,6 +65,7 @@ class Session
 
     public static function is_owner(string $owner_email): bool
     {
+        self::ensureStarted();
         return self::is_admin() || self::get("email") == $owner_email;
     }
 }
