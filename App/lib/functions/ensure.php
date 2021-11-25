@@ -57,3 +57,14 @@ function ensure_form_full(array $expected_keys, array $form)
         }
     }
 }
+
+function is_array_full(array $expected_keys, array $array): bool
+{
+    foreach ($expected_keys as $key)
+    {
+        // if a field is not found or is empty
+        if (!array_key_exists($key, $array) || empty($array[$key])) return false;
+    }
+
+    return true;
+}

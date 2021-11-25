@@ -31,6 +31,9 @@
             </div>
         <?php endforeach; ?>
     </div>
+    <aside>
+        <a class="btn btn-primary" href="<?= loc('order', 'create') ?>">Commander</a>
+    </aside>
 <?php else: ?>
 <div class="no-content text-center">
     <div class="m-10">
