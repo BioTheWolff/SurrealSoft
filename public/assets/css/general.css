@@ -111,3 +111,17 @@ body > main
 .btn-link:hover {
     border-color: var(--btn-color-hover);
 }
+
+.btn-cart {
+    font-size: 1.8vw;
+    text-decoration: none;
+    padding: unset;
+    margin: 2px 5px;
+}
+.btn-cart sub {
+    font-size: 0.8vw;
+    color: var(--text-color);
+    background: var(--btn-color);
+    padding: 1px 6px 1px 6px;
+    border-radius: 100px;
+}

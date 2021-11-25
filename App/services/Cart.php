@@ -62,6 +62,16 @@ class Cart
         return array_keys($_SESSION[self::CART_PREFIX]);
     }
 
+    public static function get_quantities()
+    {
+        self::ensureStarted();
+        if (self::is_empty()) return 0;
+
+        $count = 0;
+        foreach (array_values($_SESSION[self::CART_PREFIX]) as $v) $count += $v;
+        return $count;
+    }
+
     /**
      * @param CartProduct[] $products
      */
