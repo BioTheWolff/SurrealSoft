@@ -125,3 +125,25 @@ body > main
     padding: 1px 6px 1px 6px;
     border-radius: 100px;
 }
+
+.total-cart {
+    padding: 2vw;
+    background-color: #CCC;
+    border-radius: 10px;
+    margin: 10px;
+    width: 20vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container-cart {
+    display: flex;
+    width: 60vw;
+}
+.container .product {
+    width: 40vw;
+}
+.container-cart h2 {
+    margin-top: unset;
+}
