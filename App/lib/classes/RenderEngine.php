@@ -15,7 +15,7 @@ class RenderEngine
     {
         // define "basic" variables
         $rvar_cn = $controller_name;
-        $rvar_page_title = Config::getInstance()->get("site.name", "SurrealSoft") . " | " . $page_title;
+        $rvar_page_title = Config::get("site.name", "SurrealSoft") . " | " . $page_title;
         $rvar_load_content = $controller_name . DIRECTORY_SEPARATOR . $page_path;
 
         // define extra variables

@@ -72,6 +72,8 @@ class AccountController extends AbstractCRUDController
             RenderEngine::end();
         }
 
+        //Mail::sendMail("phantomgames.fab@gmail.com", "truc");
+
         redirect();
     }
 

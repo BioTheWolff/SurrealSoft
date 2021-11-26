@@ -37,9 +37,9 @@ class Config
      * @param mixed|null $default the default value if the key doesn't exist
      * @return mixed|string|null the value, either the config or default value
      */
-    public function get(string $key, $default = null)
+    public static function get(string $key, $default = null)
     {
-        return array_key_exists($key, $this->config) ? $this->config[$key] : $default;
+        return array_key_exists($key, self::getInstance()->config) ? self::getInstance()->config[$key] : $default;
     }
 
     /**
@@ -49,10 +49,10 @@ class Config
      * @param mixed|null $default the default value for each key that doesn't exist in config
      * @return array the array of values built from the requested keys
      */
-    public function getm(array $keys, $default = null): array
+    public static function getm(array $keys, $default = null): array
     {
         $values = [];
-        foreach ($keys as $e) $values[] = $this->get($e, $default);
+        foreach ($keys as $e) $values[] = self::get($e, $default);
         return $values;
     }
 

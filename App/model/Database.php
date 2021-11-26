@@ -30,7 +30,7 @@ class Database
     private static function init_pdo()
     {
         $keys = ['database.adapter', 'database.host', 'database.dbname', 'database.user', 'database.pass', 'database.port'];
-        $conf = Config::getInstance()->getm($keys);
+        $conf = Config::getm($keys);
 
         if (in_array(null, $conf)) throw new RuntimeException("Key not found in config.");
 
@@ -76,7 +76,7 @@ class Database
         }
 
         $query = str_replace(':primary', static::$primarykey,
-            str_replace(':tablename', Config::getInstance()->get("database.table.prefix", "") . static::$tablename, $query)
+            str_replace(':tablename', Config::get("database.table.prefix", "") . static::$tablename, $query)
         );
 
         if (strpos($query, ":updatearr=''") !== false)
