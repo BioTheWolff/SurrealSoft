@@ -40,7 +40,7 @@ class MainController extends AbstractController
 
         if (is_null($user) || !$user->password_matches($_POST['password']))
         {
-            Neon::error("Le mail ou le mot de pas incorrect.");
+            Neon::error("Email ou mot de passe incorrect.");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();
         }
