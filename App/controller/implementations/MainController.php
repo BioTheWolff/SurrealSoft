@@ -23,7 +23,7 @@ class MainController extends AbstractController
     public static function connect()
     {
         redirect_if_no_permission('is_not_connected');
-        RenderEngine::smart_render(['truc' => Mail::sendMail("hdezuioezrhjfi@yopmail.com", "test1234")]);
+        RenderEngine::smart_render();
     }
 
     /**
@@ -45,6 +45,24 @@ class MainController extends AbstractController
             RenderEngine::end();
         }
 
+        if (!is_null($user->getNonce()))
+        {
+            // aucun nonce
+            if (!array_key_exists('nonce', $_GET) || !($_GET['nonce'] == $user->getNonce()))
+            {
+                Neon::error("Votre compte n'est pas vérifié, merci de regarder votre adresse email associée.");
+                RenderEngine::smart_render($_POST);
+                RenderEngine::end();
+            }
+            // nonce confirmé, on retire le nonce et on connecte l'utilisateur
+            else
+            {
+                $user->removeNonce();
+                Neon::success("Votre adresse email a été vérifiée avec succès !");
+            }
+        }
+
+        Neon::success("Vous avez été connecté avec succès !");
         Session::connect_user($user);
         header('Location: ./');
     }

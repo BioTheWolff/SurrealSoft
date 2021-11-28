@@ -26,6 +26,11 @@ class Account extends Database
         return password_verify($plain_password, $this->password);
     }
 
+    public function removeNonce(): bool
+    {
+        return Account::update(['email' => $this->email, 'nonce' => null]);
+    }
+
     /**
      * @return mixed
      */
@@ -56,14 +61,6 @@ class Account extends Database
     public function getEmail()
     {
         return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
     }
 
     /**

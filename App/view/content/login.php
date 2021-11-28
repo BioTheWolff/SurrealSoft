@@ -1,5 +1,5 @@
 
-<form action="?action=connect_" method="post">
+<form action="<?= loc(null, 'connect_', ['nonce' => $_GET['nonce'] ?? null]) ?>" method="post">
     <label>E-mail
         <input type="email" name="email" value="<?= $rvar_extra_email ?? '' ?>" required>
     </label>
@@ -10,5 +10,3 @@
 
     <input type="submit" value="Se connecter">
 </form>
-
-<?= $rvar_extra_truc ?? 'rien' ?>

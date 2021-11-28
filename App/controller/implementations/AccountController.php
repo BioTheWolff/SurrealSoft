@@ -56,12 +56,14 @@ class AccountController extends AbstractCRUDController
         // hach le mot de passe pour le mettre dans la base de données
         $hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
+        $nonce = Mail::generateNonce();
+
         $res = Account::create([
             'firstname' => $_POST['firstname'],
             'lastname' => $_POST['lastname'],
             'email' => $_POST['email'],
             'password' => $hash,
-            'nonce' => null
+            'nonce' => $nonce
         ]);
 
         // database failure
@@ -72,7 +74,7 @@ class AccountController extends AbstractCRUDController
             RenderEngine::end();
         }
 
-        //Mail::sendMail("phantomgames.fab@gmail.com", "truc");
+        Mail::sendMail($_POST['email'], $nonce);
 
         redirect();
     }

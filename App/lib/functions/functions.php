@@ -87,7 +87,7 @@ function get_path_fragment(string $controller = null, string $action = null, arr
     {
         foreach ($extra as $k => $v)
         {
-            $s .= "&$k=$v";
+            if (!is_null($v) && !empty($v)) $s .= "&$k=$v";
         }
     }
 
