@@ -2,6 +2,7 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
 require_once Path::getapp(['services', 'PHPMailer', 'PHPMailer']);
 require_once Path::getapp(['services', 'PHPMailer', 'Exception']);
@@ -17,7 +18,7 @@ class Mail
         return bin2hex($bytes);
     }
 
-    public static function sendMail(string $client_email, string $nonce): bool
+    public static function sendMail(string $client_email, string $nonce): string
     {
         $mail = new PHPMailer();
 
@@ -40,20 +41,37 @@ class Mail
 
             // Content
             $mail->isHTML(true);
-            $mail->Subject = "[SurrealSoft] Vérification d'inscription";
-            $mail->Body = "$nonce";
-            $mail->AltBody = "$nonce";
+            $mail->Subject = "[SurrealSoft] Inscription au service";
+            $mail->Body = self::getHTMLBody($nonce);
+            $mail->AltBody = self::getNoHTMLBody($nonce);
 
-            if (!$mail->send())
-            {
-                return $mail->ErrorInfo;
-            }
-            else return true;
+            return ! $mail->send() ? $mail->ErrorInfo : "OK";
         }
         catch (Exception $e)
         {
-            return false;
+            return "problem: $e";
         }
+    }
+
+    private static function getHTMLBody(string $nonce): string
+    {
+        return "<html lang='fr'>
+                    <head>
+                        <meta charset='utf-8'>
+                        <title>SurrealSoft | Confirmation d'inscription</title>
+                    </head>
+                    <body>
+                        <h2>SurrealSoft</h2>
+                        <h4>Confirmation d'inscription</h4>
+                        <p>Afin de confirmer votre inscription, veuillez vous connecter en cliquant ici :</p>
+                        <a href='https://webinfo.iutmontp.univ-montp2.fr/~zoccolaf/surrealsoft/?action=connect&nonce=$nonce'>Confirmer mon adresse e-mail</a>
+                    </body>
+                </html>";
+    }
+
+    private static function getNoHTMLBody(string $nonce): string
+    {
+        return "Pour valider votre inscription, veuillez suivre ce lien : https://webinfo.iutmontp.univ-montp2.fr/~zoccolaf/surrealsoft/?action=connect&nonce=$nonce";
     }
 
 }

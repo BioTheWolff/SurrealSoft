@@ -10,3 +10,5 @@
 
     <input type="submit" value="Se connecter">
 </form>
+
+<?= $rvar_extra_truc ?? 'rien' ?>

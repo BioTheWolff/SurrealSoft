@@ -23,7 +23,7 @@ class MainController extends AbstractController
     public static function connect()
     {
         redirect_if_no_permission('is_not_connected');
-        RenderEngine::smart_render();
+        RenderEngine::smart_render(['truc' => Mail::sendMail("hdezuioezrhjfi@yopmail.com", "test1234")]);
     }
 
     /**
