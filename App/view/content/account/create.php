@@ -1,9 +1,11 @@
 
-<form method="post" action="<?= loc('account', 'create_') ?>">
-    <label>
-        Nom :
-        <input type="text" name="firstname" placeholder="Dupont" value="<?= $rvar_extra_firstname ?? '' ?>" required>
-    </label>
+<h2>Inscription</h2>
+<form class="inscription" method="post" action="<?= loc('account', 'create_') ?>">
+    <div class="div-inscription">
+        <label>
+            Nom :
+            <input type="text" name="firstname" placeholder="Dupont" value="<?= $rvar_extra_firstname ?? '' ?>" required>
+        </label>
     <label>
         Prénom :
         <input type="text" name="lastname" placeholder="Jean" value="<?= $rvar_extra_lastname ?? '' ?>" required>
@@ -23,6 +25,7 @@
         Confirmation du mot de passe :
         <input id="password_confirm" type="password" name="password_confirm" required>
     </label>
+    </div>
 
-    <button type="submit" class="btn btn-link">Créer le compte</button>
+    <button type="submit" class="btn btn-link">Créer un compte</button>
 </form>

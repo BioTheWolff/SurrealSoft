@@ -12,7 +12,7 @@ main > * {
 
 
 /* CONTAINERS */
-.product, .no-content
+.product, .no-content, .inscription
 {
     min-height: 18vh;
     width: 50vw;
@@ -65,4 +65,33 @@ main > * {
 
 .cart-item h5 {
     margin-top: 0;
+}
+
+
+/* INSCRIPTION */
+.inscription {
+    flex-direction: column;
+    justify-content: center;
+}
+
+label > input {
+    align-items: center;
+    border-color: #069EE1;
+}
+
+label {
+    text-align: right;
+    margin-top: 20px;
+}
+
+button {
+    max-width: fit-content;
+    align-self: center;
+}
+
+.div-inscription{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-bottom: 20px;
 }
