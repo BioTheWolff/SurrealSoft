@@ -27,7 +27,8 @@ class AccountController extends AbstractCRUDController
      */
     public static function read()
     {
-        // TODO: Implement read() method.
+        RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
+            [ 'account' => Account::select($_GET['account'])]);
     }
 
     /**
@@ -35,9 +36,13 @@ class AccountController extends AbstractCRUDController
      */
     public static function readAll()
     {
-        ensure_user_permission('is_admin');
-        RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
-            ['users' => Account::selectAll()]);
+        if (Session::is_admin()) {
+            RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
+                ['users' => Account::selectAll()]);
+        } else {
+            RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
+                [ 'account' => Account::select(Session::get('id'))]);
+        }
     }
 
     /**
