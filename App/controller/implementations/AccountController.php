@@ -6,6 +6,10 @@ class AccountController extends AbstractCRUDController
 
     protected static $controller_name = 'account';
 
+    protected static $routes = [
+        "update" => ["update", "Mise à jour du compte"]
+    ];
+
     /**
      * @inheritDoc
      */
@@ -50,7 +54,18 @@ class AccountController extends AbstractCRUDController
      */
     public static function update_()
     {
-        // TODO: Implement updated() method.
+        $a = array_merge(['form_action' => 'update_', 'is_update' => true, 'account' => Account::selectByEmail($_POST['email'] ?? '')], $_POST);
+        ensure_form_full(['firstname', 'lastname', 'email'], $a);
+        echo var_dump($_POST);
+
+        if (Session::get('email') != $_POST['email'] && Account::selectByEmail($_POST['email']) != null) {
+            // TODO: replace with a flash
+            echo "l'email existe déjà";
+            redirect('account');
+        } else {
+            Account::update($_POST);
+            redirect('account');
+        }
     }
 
     /**
@@ -58,8 +73,8 @@ class AccountController extends AbstractCRUDController
      */
     public static function update()
     {
-        ensure_user_permission('is_owner', [$_GET['email']]);
-        // insérer fonction ici
+        ensure_user_permission('is_owner', [$_GET['account']]);
+        RenderEngine::smart_render(['form_action' => 'update_', 'is_update' => true, 'account' => Account::select($_GET['account'])]);
     }
 
     /**
