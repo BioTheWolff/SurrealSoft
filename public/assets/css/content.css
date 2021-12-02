@@ -12,7 +12,7 @@ main > * {
 
 
 /* CONTAINERS */
-.product, .no-content, .inscription
+.product, .no-content, .inscription, .connection
 {
     min-height: 18vh;
     width: 50vw;
@@ -69,27 +69,27 @@ main > * {
 
 
 /* INSCRIPTION */
-.inscription {
+.inscription, .connection {
     flex-direction: column;
     justify-content: center;
 }
 
-label > input {
+.div-inscription > label > input, .div-connexion > label > input{
     align-items: center;
     border-color: #069EE1;
 }
 
-label {
+.div-inscription > label, .div-connexion > label {
     text-align: right;
     margin-top: 20px;
 }
 
-button {
+button, #seconnecter {
     max-width: fit-content;
     align-self: center;
 }
 
-.div-inscription{
+.div-inscription, .div-connexion{
     display: flex;
     flex-direction: column;
     align-self: center;
