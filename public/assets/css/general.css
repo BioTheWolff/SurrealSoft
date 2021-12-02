@@ -111,3 +111,39 @@ body > main
 .btn-link:hover {
     border-color: var(--btn-color-hover);
 }
+
+.btn-cart {
+    font-size: 1.8vw;
+    text-decoration: none;
+    padding: unset;
+    margin: 2px 5px;
+}
+.btn-cart sub {
+    font-size: 0.8vw;
+    color: var(--text-color);
+    background: var(--btn-color);
+    padding: 1px 6px 1px 6px;
+    border-radius: 100px;
+}
+
+.total-cart {
+    padding: 2vw;
+    background-color: #CCC;
+    border-radius: 10px;
+    margin: 10px;
+    width: 20vw;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.container-cart {
+    display: flex;
+    width: 60vw;
+}
+.container .product {
+    width: 40vw;
+}
+.container-cart h2 {
+    margin-top: unset;
+}

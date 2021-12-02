@@ -96,3 +96,12 @@ function get_path_fragment(string $controller = null, string $action = null, arr
 
     return $s;
 }
+
+
+/**
+ * @return CartProduct[]
+ */
+function get_cart_products(): array
+{
+    return Cart::add_product_quantities(CartProduct::selectSome(Cart::get_items()));
+}

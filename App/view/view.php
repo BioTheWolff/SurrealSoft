@@ -1,6 +1,9 @@
 <?php
 $rvar_load_content = $rvar_load_content ?? '';
 $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
+
+$cart_val = '🛒';
+if(($q = Cart::get_quantities()) > 0) $cart_val .= "<sub>$q</sub>";
 ?>
 
 <!doctype html>
@@ -33,7 +36,7 @@ $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
         </div>
 
         <div class="nav-end">
-            <a href="?controller=cart" class="btn btn-link">Panier</a>
+            <a href="?controller=cart" class="btn-cart"><?= $cart_val ?></a>
 
             <!-- espace de connexion/inscription -->
             <?php if(Session::is_connected()): ?>
