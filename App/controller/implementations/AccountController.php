@@ -40,7 +40,7 @@ class AccountController extends AbstractCRUDController
         }
 
         // pattern mot de passe
-        if (!preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])(?=\S*[\W])\S*$/", $_POST['password'])) {
+        if (!preg_match("/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/", $_POST['password'])) {
             Neon::error("Le mot de passe ne remplit pas les critères demandés");
             RenderEngine::smart_render($_POST);
             RenderEngine::end();

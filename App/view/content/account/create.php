@@ -18,7 +18,7 @@
     <label>
         Mot de passe :
         <input id="password" type="password" name="password"
-               title="8 caractères au minimum, au moins un chiffre, une majuscule, une minuscule et un caractère spécial" required>
+               title="8 caractères au minimum, au moins un chiffre, une majuscule, une minuscule" required>
     </label>
 
     <label>
