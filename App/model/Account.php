@@ -4,7 +4,7 @@
 class Account extends Database
 {
     protected static $tablename = 'accounts';
-    protected static $primarykey = 'email';
+    protected static $primarykey = 'id';
 
     protected $id;
     protected $firstname;
@@ -80,6 +80,15 @@ class Account extends Database
     public function getNonce()
     {
         return $this->nonce;
+    }
+
+    public static function selectByEmail(string $value)
+    {
+        $stmt = self::getPDO()->prepare(self::prepare_statement("SELECT * FROM :tablename WHERE email = :val"));
+        $stmt->execute(['val' => $value]);
+
+        $res = $stmt->fetchAll(PDO::FETCH_CLASS, static::class);
+        return $res[0] ?? null;
     }
 
     public function get(string $parameter, $default = null)
