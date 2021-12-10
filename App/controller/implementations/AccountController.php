@@ -131,8 +131,7 @@ class AccountController extends AbstractCRUDController
         ensure_form_full(['firstname', 'lastname', 'email'], $a);
 
         if (Session::get('email') != $_POST['email'] && Account::selectByEmail($_POST['email']) != null) {
-            // TODO: replace with a flash
-            echo "l'email existe déjà";
+            Neon::error("L'email existe déjà.");
         } else {
             $arr = array_merge($_POST, ['id' => $_GET['account']]);
             Account::update($arr);
@@ -154,6 +153,28 @@ class AccountController extends AbstractCRUDController
      */
     public static function delete()
     {
-        // TODO: Implement delete() method.
+        if (!array_key_exists('account', $_GET))
+        {
+            // no account selected
+            Neon::error("Aucun utilisateur sélectionné pour la suppression.");
+            redirect('account');
+        }
+
+        ensure_user_permission('is_owner', $_GET['account']);
+
+        // si l'utilisateur est effectivement supprimé
+        if (Account::delete($_GET['account']))
+        {
+            Neon::success("Compte supprimé avec succès.");
+
+            // l'utilisateur supprimé était l'utilisateur actuel !
+            if (is_null(Account::select(Session::get('id', ''))))
+            {
+                Session::unset_user_session(); // on déconnecte l'utilisateur maintenant inexistant
+            }
+        }
+        else Neon::error("Erreur lors de la suppression de l'utilisateur.");
+
+        redirect();
     }
 }
