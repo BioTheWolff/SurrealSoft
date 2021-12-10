@@ -3,6 +3,7 @@ $rvar_load_content = $rvar_load_content ?? '';
 $rvar_page_title = $rvar_page_title ?? 'SurrealSoft';
 
 $cart_val = '🛒';
+$account_val = '👤';
 if(($q = Cart::get_quantities()) > 0) $cart_val .= "<sub>$q</sub>";
 ?>
 
@@ -40,6 +41,7 @@ if(($q = Cart::get_quantities()) > 0) $cart_val .= "<sub>$q</sub>";
 
             <!-- espace de connexion/inscription -->
             <?php if(Session::is_connected()): ?>
+                <a href="?controller=account" class="btn-cart"><?= $account_val ?></a>
                 <a href="?action=logout" class="btn btn-link">Se déconnecter</a>
             <?php else: ?>
                 <a href="<?= loc('account', 'create') ?>" class="btn btn-primary">S'inscrire</a>

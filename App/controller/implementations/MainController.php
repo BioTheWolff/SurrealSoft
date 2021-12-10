@@ -36,7 +36,7 @@ class MainController extends AbstractController
         ensure_form_full(['email', 'password'], $_POST);
 
         /** @var Account|null $user */
-        $user = Account::select($_POST['email']);
+        $user = Account::selectByEmail($_POST['email']);
 
         if (is_null($user) || !$user->password_matches($_POST['password']))
         {

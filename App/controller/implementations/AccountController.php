@@ -7,7 +7,8 @@ class AccountController extends AbstractCRUDController
     protected static $controller_name = 'account';
 
     protected static $routes = [
-        'create' => ['create', 'Inscription']
+        'create' => ['create', 'Inscription'],
+        "update" => ["update", "Mise à jour du compte"]
     ];
 
     /**
@@ -93,7 +94,8 @@ class AccountController extends AbstractCRUDController
      */
     public static function read()
     {
-        // TODO: Implement read() method.
+        RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
+            [ 'account' => Account::select($_GET['account'])]);
     }
 
     /**
@@ -101,9 +103,13 @@ class AccountController extends AbstractCRUDController
      */
     public static function readAll()
     {
-        ensure_user_permission('is_admin');
-        RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
-            ['users' => Account::selectAll()]);
+        if (Session::is_admin()) {
+            RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
+                ['users' => Account::selectAll()]);
+        } else {
+            RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
+                [ 'account' => Account::select(Session::get('id'))]);
+        }
     }
 
     /**
@@ -111,7 +117,18 @@ class AccountController extends AbstractCRUDController
      */
     public static function update_()
     {
-        // TODO: Implement updated() method.
+        ensure_user_permission('is_owner', $_GET['account']);
+        $a = array_merge(['form_action' => 'update_', 'is_update' => true, 'account' => Account::selectByEmail($_POST['email'] ?? '')], $_POST);
+        ensure_form_full(['firstname', 'lastname', 'email'], $a);
+
+        if (Session::get('email') != $_POST['email'] && Account::selectByEmail($_POST['email']) != null) {
+            // TODO: replace with a flash
+            echo "l'email existe déjà";
+            redirect('account');
+        } else {
+            Account::update($_POST);
+            redirect('account');
+        }
     }
 
     /**
@@ -119,8 +136,8 @@ class AccountController extends AbstractCRUDController
      */
     public static function update()
     {
-        ensure_user_permission('is_owner', [$_GET['email']]);
-        // insérer fonction ici
+        ensure_user_permission('is_owner', $_GET['account']);
+        RenderEngine::smart_render(['form_action' => 'update_', 'is_update' => true, 'account' => Account::select($_GET['account'])]);
     }
 
     /**
