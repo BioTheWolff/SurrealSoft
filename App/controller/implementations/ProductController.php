@@ -109,7 +109,8 @@ class ProductController extends AbstractCRUDController
     public static function delete()
     {
         ensure_user_permission('is_admin');
-        // TODO: Implement delete() method.
+        Product::delete($_GET['product']);
+        redirect('product');
     }
 
     private static function sanitize_product()

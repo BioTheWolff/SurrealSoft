@@ -153,4 +153,11 @@ class Database
         return $stmt->rowCount() > 0;
     }
 
+    public static function delete(string $value): bool{
+        $stmt = self::getPDO()->prepare(self::prepare_statement("DELETE FROM :tablename WHERE :primary = :val"));
+        $stmt->execute(['val' => $value]);
+
+        return $stmt->rowCount() > 0;
+    }
+
 }
