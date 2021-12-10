@@ -13,7 +13,7 @@
  * @param string $session_callable the function to call in the Session class
  * @param array|null $args the arguments to the function
  */
-function ensure_user_permission(string $session_callable, array $args = null)
+function ensure_user_permission(string $session_callable, ...$args)
 {
     if(!call_user_func("Session::$session_callable", $args)) http_403();
 }

@@ -3,9 +3,15 @@
 $a = ${v('account')};
 /** @var Account $a */
 
+$action = loc(
+        $rvar_cn ?? null,
+        ${v('form_action')} ?? null,
+        ['account' => $a->getId()]
+);
+
 ?>
 
-<form method="post" action="<?= loc($rvar_cn ?? null, ${v('form_action')} ?? null) ?>" enctype="multipart/form-data">
+<form method="post" action="<?= $action ?>" enctype="multipart/form-data">
     <fieldset>
         <legend>Détails du compte</legend>
 

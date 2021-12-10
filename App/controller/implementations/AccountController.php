@@ -11,6 +11,12 @@ class AccountController extends AbstractCRUDController
         "update" => ["update", "Mise à jour du compte"]
     ];
 
+    public static function _default()
+    {
+        // by default, read self user, not all users
+        self::read();
+    }
+
     /**
      * @inheritDoc
      */
@@ -94,8 +100,11 @@ class AccountController extends AbstractCRUDController
      */
     public static function read()
     {
+        // redirect to homepage if not connected
+        redirect_if_no_permission('is_connected');
+
         RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
-            [ 'account' => Account::select($_GET['account'])]);
+            [ 'account' => Account::select($_GET['account'] ?? Session::get('id'))]);
     }
 
     /**
@@ -103,13 +112,11 @@ class AccountController extends AbstractCRUDController
      */
     public static function readAll()
     {
-        if (Session::is_admin()) {
-            RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
+        // read self account if not admin
+        redirect_if_no_permission('is_admin', 'account', 'read');
+
+        RenderEngine::render(self::get_cn(), 'list', 'Liste des utilisateurs',
                 ['users' => Account::selectAll()]);
-        } else {
-            RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
-                [ 'account' => Account::select(Session::get('id'))]);
-        }
     }
 
     /**
@@ -118,17 +125,17 @@ class AccountController extends AbstractCRUDController
     public static function update_()
     {
         ensure_user_permission('is_owner', $_GET['account']);
-        $a = array_merge(['form_action' => 'update_', 'is_update' => true, 'account' => Account::selectByEmail($_POST['email'] ?? '')], $_POST);
+        $a = array_merge(['form_action' => 'update_', 'is_update' => true, 'account' => Account::select($_GET['account'])], $_POST);
         ensure_form_full(['firstname', 'lastname', 'email'], $a);
 
         if (Session::get('email') != $_POST['email'] && Account::selectByEmail($_POST['email']) != null) {
             // TODO: replace with a flash
             echo "l'email existe déjà";
-            redirect('account');
         } else {
-            Account::update($_POST);
-            redirect('account');
+            $arr = array_merge($_POST, ['id' => $_GET['account']]);
+            Account::update($arr);
         }
+        redirect('account');
     }
 
     /**
