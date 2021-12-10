@@ -13,8 +13,7 @@ class OrderController extends AbstractCrudController
      */
     public static function create_()
     {
-        // TODO: implement the "order completed" page
-        redirect(); // for now, redirects to homepage
+        RenderEngine::render(self::get_cn(), 'created', 'Commande effectuée');
     }
 
     /**
@@ -68,7 +67,7 @@ class OrderController extends AbstractCrudController
      */
     public static function update_()
     {
-        // TODO: Implement updated() method.
+        http_403(); // impossible de modifier une commande une fois passée
     }
 
     /**
@@ -76,8 +75,7 @@ class OrderController extends AbstractCrudController
      */
     public static function update()
     {
-        ensure_user_permission('is_owner', [$_GET['email']]);
-        // insérer fonction ici
+        http_403(); // impossible de modifier une commande une fois passée
     }
 
     /**
@@ -85,6 +83,8 @@ class OrderController extends AbstractCrudController
      */
     public static function delete()
     {
-        // TODO: Implement delete() method.
+        // impossible de supprimer une commande !
+        // seulement d'en changer son état, ce qui n'est pas implémenté ici
+        http_403();
     }
 }

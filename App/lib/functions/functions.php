@@ -63,6 +63,7 @@ function redirect(string $controller = null, string $action = null, array $args 
  */
 function loc(string $controller = null, string $action = null, array $extra = null): string
 {
+    if (is_null($controller) && is_null($action) && is_null($extra)) return './';
     return get_path_fragment($controller, $action, $extra);
 }
 
