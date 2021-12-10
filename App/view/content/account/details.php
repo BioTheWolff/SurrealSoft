@@ -2,6 +2,8 @@
 
 /** @var Account $a */
 $a = $rvar_extra_account ?? null;
+
+$suppr = Session::is_admin() && Session::get('id') != $a->getId() ? "Supprimer l'utilisateur" : "Supprimer mon compte"
 ?>
 
 <?php if (Session::is_admin()): ?>
@@ -19,6 +21,7 @@ $a = $rvar_extra_account ?? null;
     <?php else: ?>
         <h2>Votre compte:</h2>
     <?php endif; ?>
+
     <h4>Nom: <?= e($a->getFirstname()) ?> </h4>
     <h4>Prénom: <?= e($a->getLastname()) ?> </h4>
     <h4>Email: <?= e($a->getEmail()) ?> </h4>
@@ -26,5 +29,7 @@ $a = $rvar_extra_account ?? null;
     <h4>
         <a class="btn btn-link" href="<?= loc('account', 'update', ['account' => $a->getId()]) ?>">Modifier données utilisateur</a>
     </h4>
+
+    <a href="<?= loc('account', 'delete', ['account' => $a->getId()]) ?>" class="btn btn-error"><?= $suppr ?></a>
 
 <?php endif; ?>

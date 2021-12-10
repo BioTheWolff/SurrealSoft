@@ -28,7 +28,7 @@ class Account extends Database
 
     public function removeNonce(): bool
     {
-        return Account::update(['email' => $this->email, 'nonce' => null]);
+        return Account::update(['id' => $this->id, 'nonce' => null]);
     }
 
     /**
