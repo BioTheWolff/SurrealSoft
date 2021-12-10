@@ -100,11 +100,13 @@ class AccountController extends AbstractCRUDController
      */
     public static function read()
     {
+        $id = $_GET['account'] ?? Session::get('id');
+
         // redirect to homepage if not connected
-        redirect_if_no_permission('is_connected');
+        ensure_user_permission('is_owner', $id);
 
         RenderEngine::render(self::get_cn(), 'details', 'Détails du compte',
-            [ 'account' => Account::select($_GET['account'] ?? Session::get('id'))]);
+            [ 'account' => Account::select($id)]);
     }
 
     /**
