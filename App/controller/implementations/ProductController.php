@@ -28,14 +28,14 @@ class ProductController extends AbstractCRUDController
         // check that the price isn't negative
         if ((int)$_POST['price'] < 0)
         {
-            // TODO: flash message
+            Neon::error("Le prix ne peut pas être négatif.");
             RenderEngine::smart_render($a);
         }
 
         // if the product already exists
         if (Product::exists($_POST['slug']))
         {
-            // TODO: flash message
+            Neon::error("Ce slug de produit existe déjà.");
             RenderEngine::smart_render($a);
         }
 
@@ -86,7 +86,7 @@ class ProductController extends AbstractCRUDController
         // check that the price isn't negative
         if ((int)$_POST['price'] < 0)
         {
-            // TODO: flash message
+            Neon::error("Le prix du produit ne peut être négatif.");
             RenderEngine::smart_render($a);
         }
 
