@@ -14,7 +14,11 @@ $a = $rvar_extra_account ?? null;
 
 <?php else: ?>
 
-    <h2>Votre compte:</h2>
+    <?php if(Session::is_admin() && Session::get('id') != $a->getId()): ?>
+        <h2>Compte n°<?= $a->getId() ?></h2>
+    <?php else: ?>
+        <h2>Votre compte:</h2>
+    <?php endif; ?>
     <h4>Nom: <?= e($a->getFirstname()) ?> </h4>
     <h4>Prénom: <?= e($a->getLastname()) ?> </h4>
     <h4>Email: <?= e($a->getEmail()) ?> </h4>

@@ -12,7 +12,7 @@ main > * {
 
 
 /* CONTAINERS */
-.product, .no-content, .inscription, .connection
+.product, .no-content, .inscription, .connection, .account
 {
     min-height: 18vh;
     width: 50vw;
@@ -94,4 +94,11 @@ button, #seconnecter {
     flex-direction: column;
     align-self: center;
     margin-bottom: 20px;
+}
+
+
+/* ACCOUNTS */
+.account {
+    height: fit-content;
+    min-height: fit-content;
 }
