@@ -8,6 +8,10 @@ class OrderController extends AbstractCrudController
 
     protected static $controller_name = 'order';
 
+    protected static $routes = [
+        'read' => ['details', 'Détails de la commande'],
+    ];
+
     /**
      * @inheritDoc
      */
@@ -40,11 +44,11 @@ class OrderController extends AbstractCrudController
      */
     public static function read()
     {
-        RenderEngine::render(
-            self::get_cn(),
-            'details',
-            'Order details',
-            ['order' => Order::select($_GET['order'])]
+        RenderEngine::smart_render(
+            [
+                'order' => Order::select($_GET['order']),
+                'products' => OrderedProduct::allProductsForOrder($_GET['order'])
+            ]
         );
     }
 
