@@ -12,7 +12,7 @@ main > * {
 
 
 /* CONTAINERS */
-.product, .no-content, .inscription, .connection, .account
+.product, .no-content, .inscription, .connection, .account, .acount-form, .account-details
 {
     min-height: 18vh;
     width: 50vw;
@@ -69,31 +69,35 @@ main > * {
 
 
 /* INSCRIPTION */
-.inscription, .connection {
+.inscription, .connection, .acount-form{
     flex-direction: column;
     justify-content: center;
 }
 
-.div-inscription > label > input, .div-connexion > label > input{
+.div-inscription > label > input, .div-connexion > label > input, .acount-fildset > label > input{
     align-items: center;
     border-color: #069EE1;
 }
 
-.div-inscription > label, .div-connexion > label {
+.div-inscription > label, .div-connexion > label, .acount-fildset > label{
     text-align: right;
     margin-top: 20px;
 }
 
-button, #seconnecter {
+button, #seconnecter, #modifer-account, .accounts {
     max-width: fit-content;
     align-self: center;
 }
 
-.div-inscription, .div-connexion{
+.div-inscription, .div-connexion, .acount-fildset, .account-details, .account{
     display: flex;
     flex-direction: column;
     align-self: center;
     margin-bottom: 20px;
+}
+
+.account-details > * , .account{
+    text-align: center;
 }
 
 
@@ -101,4 +105,9 @@ button, #seconnecter {
 .account {
     height: fit-content;
     min-height: fit-content;
+}
+
+.account > a{
+    margin-bottom: 10px;
+    margin-top: 10px;
 }

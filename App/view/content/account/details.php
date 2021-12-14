@@ -15,7 +15,7 @@ $suppr = Session::is_admin() && Session::get('id') != $a->getId() ? "Supprimer l
     <div class="no-content">Aucun compte trouvé sous cet identifiant.</div>
 
 <?php else: ?>
-
+    <div class="account-details">
     <?php if(Session::is_admin() && Session::get('id') != $a->getId()): ?>
         <h2>Compte n°<?= $a->getId() ?></h2>
     <?php else: ?>
@@ -25,6 +25,8 @@ $suppr = Session::is_admin() && Session::get('id') != $a->getId() ? "Supprimer l
     <h4>Nom: <?= e($a->getFirstname()) ?> </h4>
     <h4>Prénom: <?= e($a->getLastname()) ?> </h4>
     <h4>Email: <?= e($a->getEmail()) ?> </h4>
+
+    </div>
 
     <h4>
         <a class="btn btn-link" href="<?= loc('account', 'update', ['account' => $a->getId()]) ?>">Modifier données utilisateur</a>

@@ -11,8 +11,8 @@ $action = loc(
 
 ?>
 
-<form method="post" action="<?= $action ?>" enctype="multipart/form-data">
-    <fieldset>
+<form method="post" action="<?= $action ?>" enctype="multipart/form-data" class="acount-form">
+    <fieldset class="acount-fildset">
         <legend>Détails du compte</legend>
 
         <label>
@@ -31,5 +31,5 @@ $action = loc(
         </label>
     </fieldset>
 
-    <input type="submit" value="Mettre à jour le compte">
+    <input id="modifer-account" type="submit" class="btn btn-link" value="Mettre à jour le compte">
 </form>

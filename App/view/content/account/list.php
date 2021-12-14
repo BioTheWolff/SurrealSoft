@@ -7,9 +7,17 @@ $rvar_extra_users = $rvar_extra_users ?? [];
 <?php if(empty($rvar_extra_users)): ?>
     <div>No users to display!</div>
 <?php else: ?>
-    <?php foreach ($rvar_extra_users as $account): /** @var Account $account */ ?>
     <div class="account">
-        <a href="<?= loc('account', 'read', ['account' => re($account->getId())]) ?>"><?= e($account->getFirstname()) ?> <?= strtoupper(e($account->getLastname())) ?> (email: <?= e($account->getEmail()) ?>)</a>
+        <?php foreach ($rvar_extra_users as $account): /** @var Account $account */?>
+
+            <a class="btn btn-link" href="<?= loc('account', 'read', ['account' => re($account->getId())]) ?>">
+                <?php if(Session::is_admin() && Session::get('id') != $account->getId()): ?>
+                    Compte n°<?= $account->getId() ?>:
+                <?php else: ?>
+                    Votre compte:
+                <?php endif; ?>
+                <?= e($account->getFirstname()) ?> <?= strtoupper(e($account->getLastname())) ?> (email: <?= e($account->getEmail()) ?>)</a>
+
+        <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
 <?php endif; ?>
