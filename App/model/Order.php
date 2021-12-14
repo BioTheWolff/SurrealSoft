@@ -130,4 +130,20 @@ class Order extends Database
     {
         return self::create(['clientId' => $clientId, 'date' => date("Y-m-d H:i:s"), 'products' => $products]);
     }
+
+    /**
+     * @param string $user_id the user's id
+     * @return Order[]
+     */
+    public static function selectOrdersForUser(string $user_id): array
+    {
+        $stmt = self::getPDO()->prepare(
+            "SELECT o.* FROM surrealsoft__orders o 
+                    JOIN surrealsoft__accounts a 
+                        ON a.id = o.clientId
+                        WHERE a.id = :val");
+        $stmt->execute(['val' => $user_id]);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, self::class);
+    }
 }

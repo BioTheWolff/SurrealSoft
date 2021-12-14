@@ -10,6 +10,7 @@ class OrderController extends AbstractCrudController
 
     protected static $routes = [
         'read' => ['details', 'Détails de la commande'],
+        'readAll' => ['list', 'Liste des commandes']
     ];
 
     /**
@@ -57,13 +58,20 @@ class OrderController extends AbstractCrudController
      */
     public static function readAll()
     {
-        ensure_user_permission('is_admin');
-        RenderEngine::render(
-            self::get_cn(),
-            'list',
-            'Orders list',
-            ['orders' => Order::selectAll()]
-        );
+        // if an account ID is given
+        if (array_key_exists('account',$_GET))
+        {
+            $a = $_GET['account'];
+            ensure_user_permission('is_owner', [$a]);
+            RenderEngine::smart_render(['orders' => Order::selectOrdersForUser($a)]);
+        }
+
+        // if none is given, we try to display the admin route
+        else
+        {
+            ensure_user_permission('is_admin');
+            RenderEngine::smart_render(['orders' => Order::selectAll()]);
+        }
     }
 
     /**

@@ -32,6 +32,10 @@ $suppr = Session::is_admin() && Session::get('id') != $a->getId() ? "Supprimer l
         <a class="btn btn-link" href="<?= loc('account', 'update', ['account' => $a->getId()]) ?>">Modifier données utilisateur</a>
     </h4>
 
+    <div>
+        <a class="btn btn-link" href="<?= loc('order', 'readAll', ['account' => $a->getId()]) ?>">Voir mes commandes</a>
+    </div>
+
     <a href="<?= loc('account', 'delete', ['account' => $a->getId()]) ?>" class="btn btn-error"><?= $suppr ?></a>
 
 <?php endif; ?>

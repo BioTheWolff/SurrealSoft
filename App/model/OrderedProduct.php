@@ -7,6 +7,14 @@ class OrderedProduct extends Product
 
     protected $quantity;
 
+    /**
+     * @return mixed
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
     // Redirection par le parent pour agir comme un produit normal
     public static function select(string $value)
     {
