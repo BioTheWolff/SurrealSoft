@@ -11,9 +11,11 @@ $total = function ($p, $q) { return $p * $q; };
 <div>
     <h2>ORDER ID #<?= $o->getId() ?></h2>
 
-    <p>Montant: <?= $o->getAmount() ?> euros</p>
-    <p>Date: <?= $o->getDate() ?></p>
-    <p>ID Client: <?= $o->getClientId() ?></p>
+    <p>Montant total: <?= $o->getAmount() ?>€</p>
+    <p>Commande effectuée le <?= date("j/m/Y, à H:i:s", strtotime($o->getDate())) ?></p>
+    <?php if (Session::is_admin()): ?>
+        <p>ID Client: <?= $o->getClientId() ?></p>
+    <?php endif; ?>
 
 </div>
 

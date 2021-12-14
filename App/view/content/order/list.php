@@ -3,7 +3,7 @@ $rvar_extra_orders = $rvar_extra_orders ?? [];
 ?>
 
 <?php if (empty($rvar_extra_orders)) : ?>
-    <div>No orders to display!</div>
+    <div class="no-content">Aucune commande passée pour le moment !</div>
 <?php else : ?>
     <h2>Liste des commandes client</h2>
     <ul>

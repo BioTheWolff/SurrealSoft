@@ -45,9 +45,13 @@ class OrderController extends AbstractCrudController
      */
     public static function read()
     {
+        /** @var Order $order */
+        $order = Order::select($_GET['order']);
+        ensure_user_permission('is_owner', $order->getClientId());
+
         RenderEngine::smart_render(
             [
-                'order' => Order::select($_GET['order']),
+                'order' => $order,
                 'products' => OrderedProduct::allProductsForOrder($_GET['order'])
             ]
         );
@@ -62,7 +66,7 @@ class OrderController extends AbstractCrudController
         if (array_key_exists('account',$_GET))
         {
             $a = $_GET['account'];
-            ensure_user_permission('is_owner', [$a]);
+            ensure_user_permission('is_owner', $a);
             RenderEngine::smart_render(['orders' => Order::selectOrdersForUser($a)]);
         }
 
