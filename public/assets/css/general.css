@@ -78,8 +78,9 @@ body > main
 .btn, .btn:visited { color: var(--text-color); }
 
 .btn:hover {
+    background-color: #00b0ff;
     transition: background-color .1s;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 

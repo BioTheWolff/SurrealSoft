@@ -21,3 +21,8 @@ main, main > .container {
     height: 4vw;
     margin-right: 0.4vw;
 }
+
+.btn-main {
+    font-size: 1.5em;
+    border-color: var(--btn-color);
+}
